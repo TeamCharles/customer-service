@@ -9,14 +9,14 @@ namespace customer_service.Models
 {
 
     /**
-     * Class: Department
-     * Purpose: Represents the Department table in the database
+     * Class: IncidentType
+     * Purpose: Represents the IncidentType table in the database
      * Author: Team Charles
      */
-    public class Department
+    public class IncidentType
     {
         [Key]
-        public int DepartmentId { get; set; }
+        public int IncidentTypeId { get; set; }
 
         [Required]
         [DataType(DataType.Date)]
@@ -27,7 +27,7 @@ namespace customer_service.Models
         public string Label { get; set; }
 
         // Foreign Key Dependencies
-        public ICollection<Employee> Employees;
+        public ICollection<IncidentTypeLabel> IncidentTypeLabels;
 
     }
 }

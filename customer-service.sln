@@ -12,6 +12,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "customer-service", "src\customer-service\customer-service.xproj", "{89838FB9-72F3-4963-B766-01FEF10A85B0}"
 EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "customer-service-tests", "customer-service-tests\customer-service-tests.xproj", "{DFAB50ED-6C93-4D8F-8241-4ED343929485}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -22,11 +24,16 @@ Global
 		{89838FB9-72F3-4963-B766-01FEF10A85B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{89838FB9-72F3-4963-B766-01FEF10A85B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{89838FB9-72F3-4963-B766-01FEF10A85B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DFAB50ED-6C93-4D8F-8241-4ED343929485}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFAB50ED-6C93-4D8F-8241-4ED343929485}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DFAB50ED-6C93-4D8F-8241-4ED343929485}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DFAB50ED-6C93-4D8F-8241-4ED343929485}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{89838FB9-72F3-4963-B766-01FEF10A85B0} = {DA1617EB-F26C-4E6C-AE72-71CA2E092E80}
+		{DFAB50ED-6C93-4D8F-8241-4ED343929485} = {DA1617EB-F26C-4E6C-AE72-71CA2E092E80}
 	EndGlobalSection
 EndGlobal

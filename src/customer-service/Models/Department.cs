@@ -9,14 +9,14 @@ namespace customer_service.Models
 {
 
     /**
-     * Class: Employee
-     * Purpose: Represents the Employee table in the database
+     * Class: Department
+     * Purpose: Represents the Department table in the database
      * Author: Team Charles
      */
-    public class Employee
+    public class Department
     {
         [Key]
-        public int EmployeeId { get; set; }
+        public int DepartmentId { get; set; }
 
         [Required]
         [DataType(DataType.Date)]
@@ -24,20 +24,10 @@ namespace customer_service.Models
         public DateTime DateCreated { get; set; }
 
         [Required]
-        public string FirstName { get; set; }
-
-        [Required]
-        public string LastName { get; set; }
-
-        [Required]
-        public int DepartmentId { get; set; }
-        public Department Department { get; set; }
-
-        [Required]
-        public bool Administrator { get; set; }
+        public string Label { get; set; }
 
         // Foreign Key Dependencies
-        public ICollection<Incident> Incidents;
+        public ICollection<Employee> Employees;
 
     }
 }
