@@ -21,11 +21,11 @@ INSERT INTO IncidentType (Label) VALUES ('Shipping Info Update');
 Add some employees
 */ 
 INSERT INTO Employee (FirstName,LastName,DepartmentId,Administrator) VALUES
-	('Matt','Kraatz',1,false),
-	('Anulfo','Ordaz',2,true),
-	('Matt','Hamil',3,false),
-	('Dayne','Wright',4,false),
-	('Garrett','Vangilder',5,true);
+	('Matt','Kraatz',1,0),
+	('Anulfo','Ordaz',2,1),
+	('Matt','Hamil',3,0),
+	('Dayne','Wright',4,0),
+	('Garrett','Vangilder',5,1);
 
 /*
 Add some customers
