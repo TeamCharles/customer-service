@@ -1,6 +1,12 @@
 ## Status
 **READY/IN DEVELOPMENT**
 
+## Testing
+
+[ ] I have added passing tests for all new functionality.
+
+[ ] I have confirmed that all test prior to this pull request still PASS.
+
 ## Documentation
 
 [ ] I have fully documented features in this PR's code. Please put an `X` in the box to confirm.
