@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Data.Sqlite;
 using customer_service.Models;
+using customer_service.Data;
 
 namespace customer_service.Factories
 {
@@ -48,17 +49,18 @@ namespace customer_service.Factories
                 FirstName, 
                 LastName, 
                 DepartmentId,
-                Administrator,
+                Administrator
+                FROM Employee
                 WHERE EmployeeId = " + EmployeeId, (SqliteDataReader reader) => {
                 while (reader.Read())
                 {
                     e = new Employee
                     {
-                        EmployeId = reader.GetInt32(0),
+                        EmployeeId = reader.GetInt32(0),
                         FirstName = reader[1].ToString(),
                         LastName = reader[2].ToString(),
                         DepartmentId = reader.GetInt32(3),
-                        Administrator = reader[4].ToBool(),
+                        Administrator = Convert.ToBoolean(reader.GetInt32(4))
                     };
                 }
             });
@@ -75,28 +77,22 @@ namespace customer_service.Factories
 
             // Execute the query to retrieve all customers
             conn.execute(@"SELECT 
-				IdCustomer,
-				FirstName,  
-				LastName, 
-				StreetAddress, 
-				City, 
-				StateProvince, 
-				PostalCode, 
-				PhoneNumber 
-				FROM customer",
+                EmployeeId,
+                FirstName, 
+                LastName, 
+                DepartmentId,
+                Administrator
+                FROM Employee",
                 (SqliteDataReader reader) => {
                     while (reader.Read())
                     {
-                        list.Add(new Customer
+                        list.Add(new Employee
                         {
-                            id = reader.GetInt32(0),
+                            EmployeeId = reader.GetInt32(0),
                             FirstName = reader[1].ToString(),
                             LastName = reader[2].ToString(),
-                            StreetAddress = reader[3].ToString(),
-                            City = reader[4].ToString(),
-                            StateProvince = reader[5].ToString(),
-                            PostalCode = reader[6].ToString(),
-                            PhoneNumber = reader[7].ToString()
+                            DepartmentId = reader.GetInt32(3),
+                            Administrator = Convert.ToBoolean(reader.GetInt32(4))
                         });
                     }
                 }
