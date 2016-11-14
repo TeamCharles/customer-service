@@ -14,7 +14,7 @@ namespace customer_service.Data
      */
     public class BangazonConnection
     {
-        private string _path = System.Environment.GetEnvironmentVariable("BangazonWeb_Db_Path");
+        private string _path = "Data Source=" +  System.Environment.GetEnvironmentVariable("BangazonWeb_Db_Path");
 
         /**
          * Purpose: Inserts new information into the datase
