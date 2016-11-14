@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Xunit;
+﻿using Xunit;
+using customer_service.Factories;
+using customer_service.Models;
 
 namespace customer_service_tests
 {
@@ -14,15 +12,19 @@ namespace customer_service_tests
         [InlineData(3)]
         public void CanGetEmployeeById(int id)
         {
-            //CustomerFactory customerFactory = new CustomerFactory();
-            //var employee = customerFactory.get(id);
+            EmployeeFactory customerFactory = new EmployeeFactory();
+            var employee = employeeFactory.get(id);
 
-            //var expectedType = typeof(Employee);
-            //var actualType = typeof(employee);
+            var expectedType = typeof(Employee);
+            var actualType = typeof(employee);
 
-            //Assert.IsType(expectedType, actualType);
-            //Assert.True(employee != null);
-            Assert.True(true);
+            Assert.IsType(expectedType, actualType);
+            Assert.NotNull(employee);
+            Assert.NotNull(employee.DateCreated);
+            Assert.True(employee.FirstName.Length > 0);
+            Assert.True(employee.LastName.Length > 0);
+            Assert.IsType(typeof(employee.DepartmentId), typeof(int));
+            Assert.IsType(typeof(employee.Administrator), typeof(bool));
         }
     }
 }
