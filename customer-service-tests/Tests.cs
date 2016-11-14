@@ -8,6 +8,10 @@ namespace customer_service_tests
 {
     public class Tests
     {
-        
+        [Fact]
+        public void DoATest()
+        {
+            Assert.True(true);
+        }
     }
 }
