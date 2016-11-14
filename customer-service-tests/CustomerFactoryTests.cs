@@ -4,6 +4,7 @@ using System.Linq;
 using customer_service.Models;
 using System.Threading.Tasks;
 using Xunit;
+using customer_service.Factories;
 
 namespace customer_service_tests
 {
@@ -24,6 +25,20 @@ namespace customer_service_tests
         }
 
         [Fact]
-        public void 
+        public void CustomerModelSetsActiveCustomer()
+        {
+            Customer customer = CustomerFactory.Instance.ActiveCustomer;
+            Assert.NotNull(customer);
+
+        }
+
+        [Fact]
+        public void CustomerFactoryWillGetSingleCustomerFromDatabase()
+        {
+            Customer customer = CustomerFactory.get(1);
+            Assert.Equal("Steve", customer.FirstName);
+            Assert.Equal("BrownLee", customer.LastName);
+            Assert.Equal(1, customer.CustomerId);
+        }
     }
 }
