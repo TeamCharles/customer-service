@@ -8,6 +8,14 @@ using Microsoft.Data.Sqlite;
 
 namespace customer_service
 {
+
+    /**
+     * Class: IncidentTypeFactory
+     * Purpose: Provide all interactions with the IncidentType table on the database
+     * Author: Matt Kraatz
+     * Methods:
+     *     List<IncidentType> getAll() - Retrieves all Incident Types from the database
+     */
     public class IncidentTypeFactory
     {
         // Make the factory a singleton to maintain state across all uses
@@ -24,7 +32,14 @@ namespace customer_service
             }
         }
 
-        // Get all customers
+
+        /**
+         * Purpose: Retrieve all Incident Types from the database
+         * Arguments:
+         *     void
+         * Return:
+         *     A list of all Incident Types with an IncidentTypeId and Label
+         */
         public List<IncidentType> getAll()
         {
             BangazonConnection conn = new BangazonConnection();
