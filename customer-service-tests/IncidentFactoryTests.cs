@@ -34,5 +34,15 @@ namespace customer_service_tests
             Assert.Equal("Just Deal With it!", incident.Resolution);
 
         }
+
+        [Fact]
+        public void IncidentFactoryCanGetListOfIncidents()
+        {
+            IncidentFactory factory = new IncidenFactory();
+            IEnumerable<Incident> list = factory.get();
+            Assert.NotEmpty(list);
+
+        }
+
     }
 }
