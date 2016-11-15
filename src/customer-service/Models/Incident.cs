@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
+using customer_service.Data;
 
 namespace customer_service.Models
 {
@@ -39,5 +40,21 @@ namespace customer_service.Models
 
         [DataType(DataType.Date)]
         public DateTime? DateResolved { get; set; }
+
+        public void save()
+        {
+            string query = "INSERT INTO Incident (OrderId,EmployeeId,Resolution,DateResolved) "
+                + $"VALUES ({this.OrderId},{this.EmployeeId},{this.Resolution},{this.DateResolved})";
+            BangazonConnection conn = new BangazonConnection();
+            conn.insert(query);
+        }
+
+        public void update()
+        {
+            string query = $"UPDATE Incident SET Resolution = {this.Resolution}, DateResolved = {this.DateResolved}"
+                + $"WHERE IncidentId = ${this.IncidentId}";
+            BangazonConnection conn = new BangazonConnection();
+            conn.insert(query);
+        }
     }
 }
