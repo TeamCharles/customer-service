@@ -11,8 +11,11 @@ namespace customer_service.Models
 
     /**
      * Class: Incident
-     * Purpose: Represents the Incident table in the database
-     * Author: Team Charles
+     * Purpose: Represents the Incident table in the database, allows for saving and updating of Incident rows
+     * Author: Matt Kraatz
+     * Methods:
+     *      save() - inserts this Incident into the database via SQL
+     *      update() - updates this Incident in the database via SQL
      */
     public class Incident
     {
@@ -41,18 +44,42 @@ namespace customer_service.Models
         [DataType(DataType.Date)]
         public DateTime? DateResolved { get; set; }
 
+
+        /**
+         * Purpose: Insert this Incident into the database via SQL
+         * Arguments:
+         *     void
+         * Return:
+         *     void
+         */
         public void save()
         {
-            string query = "INSERT INTO Incident (OrderId,EmployeeId,Resolution,DateResolved) "
-                + $"VALUES ({this.OrderId},{this.EmployeeId},{this.Resolution},{this.DateResolved})";
+            string query;
+            if (this.Resolution == null)
+            {
+                query = "INSERT INTO Incident (OrderId,EmployeeId,IncidentTypeId,Resolution,DateResolved) "
+                    + $"VALUES ({this.OrderId},{this.EmployeeId},{this.IncidentTypeId},\"\",null)";
+            } else
+            {
+                query = "INSERT INTO Incident (OrderId,EmployeeId,IncidentTypeId,Resolution,DateResolved) "
+                    + $"VALUES ({this.OrderId},{this.EmployeeId},{this.IncidentTypeId},{this.Resolution},{this.DateResolved})";
+            }
             BangazonConnection conn = new BangazonConnection();
             conn.insert(query);
         }
 
+
+        /**
+         * Purpose: Update this Incident in the database
+         * Arguments:
+         *     void
+         * Return:
+         *     void
+         */
         public void update()
         {
-            string query = $"UPDATE Incident SET Resolution = {this.Resolution}, DateResolved = {this.DateResolved}"
-                + $"WHERE IncidentId = ${this.IncidentId}";
+            string query = $"UPDATE Incident SET Resolution = '{this.Resolution}', DateResolved = {this.DateResolved.Value.ToString("yyyyMMdd")} "
+                + $"WHERE IncidentId = {this.IncidentId}";
             BangazonConnection conn = new BangazonConnection();
             conn.insert(query);
         }

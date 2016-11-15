@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Xunit;
 using customer_service;
 using customer_service.Models;
+using customer_service.Data;
 
 namespace customer_service_tests
 {
@@ -20,28 +21,33 @@ namespace customer_service_tests
             incident.save();
 
             var fact = new IncidentFactory();
-            // Get All Incidents, Compare Last Incident in List to Saved Incident
+            List<Incident> list = fact.getAll();
+            Incident last = list.Last();
 
+            Assert.Equal(incident.EmployeeId, last.EmployeeId);
+            Assert.Equal(incident.IncidentTypeId, last.IncidentTypeId);
+            Assert.Equal(incident.OrderId, last.OrderId);
         }
 
         [Fact]
         public void CanUpdateIncidentInDB()
         {
-            var incident = new Incident();
             var fact = new IncidentFactory();
-            // Get All Incidents, Save Last Incident in List
+            Incident last = fact.getAll().Last();
 
-            incident.Resolution = "Test Resolution";
-            incident.DateResolved = DateTime.Today;
-            incident.update();
+            last.Resolution = "Test Resolution";
+            last.DateResolved = DateTime.Today;
+            last.update();
 
-            // Get All Incidents, Compare Last Incident in List to Saved Incident
-        }
-
-        [Fact]
-        public void CleanUpIncidentInDB()
-        {
+            Incident updated = fact.get(last.IncidentId);
+            Assert.Equal(updated.Resolution, last.Resolution);
+            Assert.Equal(updated.DateResolved, last.DateResolved);
             // Remove Last Incident from Database
+            if (last.IncidentId == updated.IncidentId)
+            {
+                var conn = new BangazonConnection();
+                conn.insert($"DELETE FROM Incident WHERE IncidentId = {updated.IncidentId}");
+            }
         }
     }
 }
