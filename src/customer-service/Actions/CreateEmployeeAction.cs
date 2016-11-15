@@ -4,8 +4,21 @@ using System;
 
 namespace customer_service.Actions
 {
+
+    /**
+     * Class: CreateEmployeeAction
+     * Purpose: Prompts the user for information about a new employee and saves to DB
+     * Author: Matt Hamil
+     * Methods:
+     *     static void ReadInput() - Prompts for employee info and saves to DB
+     */
     public class CreateEmployeeAction
     {
+        /**
+         * Purpose: Reads user input for new employee information
+         * Return:
+         *     void
+         */
         public static void ReadInput()
         {
             Employee newEmployee = new Employee();
