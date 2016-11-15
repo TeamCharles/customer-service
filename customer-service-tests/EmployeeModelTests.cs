@@ -6,7 +6,7 @@ using customer_service.Data;
 
 namespace customer_service_tests
 {
-    public class EmployeeFactoryTests
+    public class EmployeeModelTests
     {
         [Fact]
         public void CanSaveNewEmployeeToDatabase()
@@ -17,7 +17,6 @@ namespace customer_service_tests
 
             Employee Jeb = new Employee()
             {
-                //EmployeeId = newEmployeeId,
                 FirstName = "Jeb",
                 LastName = "Bush",
                 DepartmentId = 1,
