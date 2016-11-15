@@ -8,11 +8,22 @@ namespace customer_service.Actions
 {
     public class CreateIncidentAction
     {
+        /**
+         * Class: CreateIncidentAction
+         * Purpose: Prompts the user for information about a new incident and saves that incident to the database
+         * Author: Garrett Vangilder
+         * Methods:
+         *     static void ReadInput() - Prompts for incident info and saves to DB
+         */
         public CreateIncidentAction()
         {
 
         }
-
+        /**
+        * Purpose: Reads user input for new incident information
+        * Return:
+        *     void
+        */
         public static void ReadInput()
         {
             IncidentFactory incidentFactory = new IncidentFactory();
