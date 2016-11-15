@@ -4,7 +4,7 @@ using System.Linq;
 using customer_service.Models;
 using System.Threading.Tasks;
 using Xunit;
-using customer_service.Factories;
+using customer_service;
 
 namespace customer_service_tests
 {

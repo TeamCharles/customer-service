@@ -3,10 +3,27 @@ using Microsoft.Data.Sqlite;
 using customer_service.Data;
 using customer_service.Models;
 
-namespace customer_service.Factories
+namespace customer_service
 {
+    /**
+     * Class: CustomerFactory
+     * Purpose: Creates a connection between the database and the user to grab individual customers
+     * Author: Garrett
+     * Methods:
+     *     
+     *     public static CustomerFactory Instance - creates an instance of the customer factory
+     *     public Customer ActiveCustomer - This method sets an active customer for the program
+     *      public Customer get(int CustomerId) - This method returns a customer from the database.
+     */
     public class CustomerFactory
     {
+        /**
+        * Purpose: Create instance of the customer factory
+        * Arguments:
+        *     n/a
+        * Return:
+        *     n/a 
+        */
         private static CustomerFactory _instance;
         public static CustomerFactory Instance
         {
@@ -19,7 +36,13 @@ namespace customer_service.Factories
                 return _instance;
             }
         }
-
+        /**
+        * Purpose: Sets an active customer 
+        * Arguments:
+        *     n/a
+        * Return:
+        *     n/a 
+        */
         private Customer _activeCustomer = null;
         public Customer ActiveCustomer
         {
@@ -32,7 +55,13 @@ namespace customer_service.Factories
                 _activeCustomer = value;
             }
         }
-
+        /**
+         * Purpose: returns a customer from the database
+         * Arguments:
+         *     int CustomerId
+         * Return:
+         *     Desidred customer that matches customerId
+         */
         public Customer get(int CustomerId)
         {
             BangazonConnection conn = new BangazonConnection();
