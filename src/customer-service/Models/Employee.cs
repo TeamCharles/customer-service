@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 using customer_service.Data;
 
 namespace customer_service.Models
@@ -54,6 +52,12 @@ namespace customer_service.Models
             return string.Format($"[Employee: EmployeeId={EmployeeId}, FirstName={FirstName}, LastName={LastName}, DepartmentId={DepartmentId}, Administrator={Administrator}");
         }
 
+
+        /**
+         * Purpose: Saves an employee instance to the database
+         * Return:
+         *     void
+         */
         public void save()
         {
             string query = string.Format(@"
@@ -65,7 +69,7 @@ namespace customer_service.Models
                 this.FirstName,
                 this.LastName,
                 this.DepartmentId,
-                this.Administrator
+                this.Administrator ? 1 : 0
             );
 
             BangazonConnection conn = new BangazonConnection();
