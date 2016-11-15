@@ -27,7 +27,7 @@ namespace customer_service_tests
         [Fact]
         public void CustomerModelSetsActiveCustomer()
         {
-            Customer customer = CustomerFactory.Instance.ActiveCustomer;
+            var customer = CustomerFactory.Instance;
             Assert.NotNull(customer);
 
         }
@@ -35,9 +35,10 @@ namespace customer_service_tests
         [Fact]
         public void CustomerFactoryWillGetSingleCustomerFromDatabase()
         {
-            Customer customer = CustomerFactory.get(1);
+            CustomerFactory factory = new CustomerFactory();
+            Customer customer = factory.get(1);
             Assert.Equal("Steve", customer.FirstName);
-            Assert.Equal("BrownLee", customer.LastName);
+            Assert.Equal("Brownlee", customer.LastName);
             Assert.Equal(1, customer.CustomerId);
         }
     }
