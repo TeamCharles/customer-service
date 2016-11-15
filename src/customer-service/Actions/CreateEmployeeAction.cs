@@ -63,8 +63,7 @@ namespace customer_service.Actions
 
             EmployeeFactory.Instance.ActiveEmployee = newEmployee;
 
-            Console.WriteLine($"{newEmployee.FirstName} {newEmployee.LastName} added. Press any key to return to main menu.");
-            Console.ReadLine();
+            Console.WriteLine($"{newEmployee.FirstName} {newEmployee.LastName} added.");
         }
     }
 }

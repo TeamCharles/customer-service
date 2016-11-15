@@ -30,12 +30,13 @@ namespace customer_service.Actions
             while (employeeName != "new user")
             {
                 employeeName = Console.ReadLine();
-                if (employeeName == "new user") break;
+                if (employeeName.ToLower() == "new user") { break; }
 
                 try
                 {
                     var loggedInEmployee = employeeFactory.getEmployeeByFullName(employeeName);
                     employeeFactory.ActiveEmployee = loggedInEmployee;
+                    break;
                 }
                 catch
                 {
@@ -46,10 +47,11 @@ namespace customer_service.Actions
 
             if (employeeName.ToLower() == "new user")
             {
-
+                CreateEmployeeAction.ReadInput();
             }
 
-            Console.WriteLine($"Welcome {employeeFactory.ActiveEmployee.FirstName} {employeeFactory.ActiveEmployee.LastName}!");
+            Console.WriteLine($"Welcome {EmployeeFactory.Instance.ActiveEmployee.FirstName} {EmployeeFactory.Instance.ActiveEmployee.LastName}! Press ENTER to go to the main menu.");
+            Console.ReadLine();
         }
     }
 }
