@@ -1,4 +1,5 @@
 ﻿using customer_service.Data;
+using customer_service.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,8 +12,8 @@ namespace customer_service
     {
         public static void ReadInput()
         {
-            CustomerFactory customer = CustomerFactory.Instance;
-            IncidentFactory incident = IncidentFactory.Instance;
+            Customer customer = CustomerFactory.Instance.ActiveIncident;
+            Incident incident = IncidentFactory.Instance.ActiveIncident;
 
             if (customer == null || incident == null)
             {
@@ -20,8 +21,8 @@ namespace customer_service
             }
             else
             {
-                IncidentTypeLabelFactory label = IncidentTypeLabelFactory.Instance;
-                incidentTypeFactory type = IncidentTypeFactory.Instance;
+                LabelFactory label = LabelFactory.Instance;
+                IncidentTypeFactory type = IncidentTypeFactory.Instance;
 
                 string customerName = $"{customer.LastName}, {customer.FirstName}";
                 string border = "==============================================================";
