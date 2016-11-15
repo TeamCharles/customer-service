@@ -8,6 +8,15 @@ using customer_service.Data;
 
 namespace customer_service.Factories
 {
+
+    /**
+     * Class: EmployeeFactory
+     * Purpose: Holds a singleton and can Get a single or get all employees
+     * Author: Matt Hamil
+     * Methods:
+     *     Employee get(int EmployeeId) - Gets an employee ID
+     *     List<Employee> getAll() - Gets all employees
+     */
     public class EmployeeFactory
     {
         // Make the factory a singleton to maintain state across all uses
@@ -38,7 +47,14 @@ namespace customer_service.Factories
             }
         }
 
-        // Get a single employee
+
+        /**
+         * Purpose: Gets a single employee from database
+         * Arguments:
+         *     EmployeeId - An Employee ID
+         * Return:
+         *     Single employee from database
+         */
         public Employee get(int EmployeeId)
         {
             BangazonConnection conn = new BangazonConnection();
@@ -69,7 +85,12 @@ namespace customer_service.Factories
             return e;
         }
 
-        // Get all employees
+
+        /**
+         * Purpose: Gets all employee records from database
+         * Return:
+         *     List of all employee records
+         */
         public List<Employee> getAll()
         {
             BangazonConnection conn = new BangazonConnection();

@@ -8,6 +8,21 @@ namespace customer_service_tests
 {
     public class EmployeeFactoryTests
     {
+        [Fact]
+        public void CanInstantiateEmployeeFactory()
+        {
+            var instance = EmployeeFactory.Instance;
+            Assert.NotNull(instance);
+        }
+
+        [Fact]
+        public void EmployeeFactoryIsSingleton()
+        {
+            var instance1 = EmployeeFactory.Instance;
+            var instance2 = EmployeeFactory.Instance;
+            Assert.Equal(instance1, instance2);
+        }
+
         [Theory]
         [InlineData(1)]
         [InlineData(2)]
