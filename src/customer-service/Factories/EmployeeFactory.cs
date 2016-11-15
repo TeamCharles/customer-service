@@ -6,7 +6,7 @@ using Microsoft.Data.Sqlite;
 using customer_service.Models;
 using customer_service.Data;
 
-namespace customer_service.Factories
+namespace customer_service
 {
 
     /**
