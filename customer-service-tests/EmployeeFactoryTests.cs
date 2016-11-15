@@ -1,6 +1,6 @@
 ﻿using Xunit;
 using System.Collections.Generic;
-using customer_service.Factories;
+using customer_service;
 using customer_service.Models;
 using customer_service.Data;
 
