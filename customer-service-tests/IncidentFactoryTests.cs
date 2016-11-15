@@ -11,28 +11,44 @@ namespace customer_service_tests
     public class IncidentFactoryTests
     {
         [Fact]
-        public void IncidentModelCreatesInstance()
+        public void CanInstantiateIncidentFactory()
         {
-            IncidentType fakeIncidentType = new IncidentType();
-            fakeIncidentType.IncidentTypeId = 999;
-            fakeIncidentType.Label = "Fake";
+            var fact = new IncidentFactory();
+            Assert.NotNull(fact);
+        }
 
-            Order fakeOrder = new Order();
-            fakeOrder.OrderId = 999;
+        [Fact]
+        public void CanQueryAllIncidents()
+        {
+            var fact = new IncidentFactory();
+            List<Incident> list = fact.getAll();
+            Assert.IsType<List<Incident>>(list);
+            Assert.NotNull(list[0].IncidentId);
+            Assert.NotNull(list[0].EmployeeId);
+            Assert.NotNull(list[0].OrderId);
+        }
 
-            Incident incident = new Incident();
-            incident.IncidentId = 9999;
-            incident.DateCreated = DateTime.Now;
-            incident.IncidentTypeId = 999;
-            incident.IncidentType = fakeIncidentType;
-            incident.OrderId = 999;
-            incident.Order = fakeOrder;
-            incident.Resolution = "Just Deal With it!";
-            Assert.Equal(9999, incident.IncidentId);
-            Assert.NotNull(incident.Order);
-            Assert.NotNull(incident.IncidentType);
-            Assert.Equal("Just Deal With it!", incident.Resolution);
+        [Theory]
+        [InlineData(1)]
+        [InlineData(2)]
+        [InlineData(3)]
+        public void CanQuerySingleIncident(int id)
+        {
+            var fact = new IncidentFactory();
+            Incident incident = fact.get(id);
+            Assert.IsType<Incident>(incident);
+            Assert.NotNull(incident.IncidentId);
+            Assert.NotNull(incident.EmployeeId);
+            Assert.NotNull(incident.OrderId);
+        }
 
+        [Theory]
+        [InlineData("20160510")]
+        public void CanParseDate(string date)
+        {
+            var fact = new IncidentFactory();
+            DateTime? parsedDate = fact.ParseDate(date);
+            Assert.Equal<DateTime?>(new DateTime(2016, 05, 10), parsedDate);
         }
     }
 }
