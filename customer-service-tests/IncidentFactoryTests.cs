@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Xunit;
 using customer_service;
 using customer_service.Models;
+using customer_service.Factories;
 
 namespace customer_service_tests
 {
@@ -38,8 +39,8 @@ namespace customer_service_tests
         [Fact]
         public void IncidentFactoryCanGetListOfIncidents()
         {
-            IncidentFactory factory = new IncidenFactory();
-            IEnumerable<Incident> list = factory.get();
+            IncidentFactory factory = new IncidentFactory();
+            IEnumerable<Incident> list = factory.getAll();
             Assert.NotEmpty(list);
 
         }
