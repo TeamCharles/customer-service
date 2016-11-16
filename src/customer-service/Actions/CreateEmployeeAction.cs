@@ -35,7 +35,7 @@ namespace customer_service.Actions
 
             while (newEmployee.LastName == null || newEmployee.LastName.Length <= 0)
             {
-                Console.WriteLine("Enter customer last name and hit return: ");
+                Console.WriteLine("Enter employee last name and hit return: ");
                 newEmployee.LastName = Console.ReadLine();
             }
 
