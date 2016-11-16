@@ -53,7 +53,7 @@ namespace customer_service
                     Console.WriteLine(incident.Resolution);
                     Console.WriteLine("==============================================================");
                     Console.Write("> ");
-                    Console.ReadLine();s
+                    Console.ReadLine();
                 }
             }
         }
