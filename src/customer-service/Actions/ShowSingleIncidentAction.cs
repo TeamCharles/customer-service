@@ -4,8 +4,24 @@ using System.Globalization;
 
 namespace customer_service
 {
+    /**
+     * Class: ShowSingleIncidentAction
+     * Purpose: Displays the menu and details for the single incident report
+     * Author: Dayne Wright
+     * Methods:
+     *     void ReadInput() - Shows the incident report and prompts for a resolution if one is not provided. 
+     *     Then saves that resolution with the current date.
+     */
+
     public class ShowSingleIncidentAction
     {
+        /**
+         * Purpose: Shows incident report and saves resolution if needed.
+         * Arguments:
+         *     NONE
+         * Return:
+         *     Void
+         */
         public static void ReadInput()
         {
             Customer customer = CustomerFactory.Instance.ActiveCustomer;
