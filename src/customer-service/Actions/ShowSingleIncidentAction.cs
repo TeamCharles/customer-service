@@ -1,6 +1,5 @@
 ﻿using customer_service.Models;
 using System;
-using System.Text;
 
 namespace customer_service
 {
@@ -43,7 +42,10 @@ namespace customer_service
                     Console.WriteLine("==============================================================");
                     Console.WriteLine("Enter Resolution: ");
                     Console.Write("> ");
-                    Console.ReadLine();  // WILL BE REMOVED BEFORE MERGE
+
+                    incident.Resolution = Console.ReadLine();
+                    incident.DateResolved = DateTime.Now;
+                    incident.Save();
                 }
                 else
                 {
@@ -51,7 +53,7 @@ namespace customer_service
                     Console.WriteLine(incident.Resolution);
                     Console.WriteLine("==============================================================");
                     Console.Write("> ");
-                    Console.ReadLine();  // WILL BE REMOVED BEFORE MERGE
+                    Console.ReadLine();s
                 }
             }
         }
