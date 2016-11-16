@@ -13,7 +13,7 @@ namespace customer_service_tests
         {
             var employeeFactory = new EmployeeFactory();
             List<Employee> allEmployees = employeeFactory.getAll();
-            int newEmployeeId = allEmployees[allEmployees.Count - 1].EmployeeId;
+            int newEmployeeId = allEmployees[allEmployees.Count - 1].EmployeeId + 1;
 
             Employee Jeb = new Employee()
             {
@@ -28,11 +28,15 @@ namespace customer_service_tests
             var shouldBeJeb = employeeFactory.get(newEmployeeId);
 
             Assert.NotNull(shouldBeJeb);
+            Assert.NotNull(shouldBeJeb.EmployeeId);
             Assert.True(newEmployeeId == shouldBeJeb.EmployeeId);
             Assert.True(Jeb.FirstName == shouldBeJeb.FirstName);
             Assert.True(Jeb.LastName == shouldBeJeb.LastName);
             Assert.True(Jeb.DepartmentId == shouldBeJeb.DepartmentId);
             Assert.True(Jeb.Administrator == shouldBeJeb.Administrator);
+
+            var conn = new BangazonConnection();
+            conn.insert($"DELETE FROM Employee WHERE EmployeeId = {shouldBeJeb.EmployeeId}");
         }
     }
 }
