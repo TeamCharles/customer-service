@@ -1,6 +1,7 @@
 ﻿using customer_service;
 using customer_service.Models;
 using System;
+using System.Collections.Generic;
 
 namespace customer_service.Actions
 {
@@ -22,22 +23,33 @@ namespace customer_service.Actions
         public static void ReadInput()
         {
             Employee newEmployee = new Employee();
+            DepartmentFactory departmentFactory = new DepartmentFactory();
+            EmployeeFactory employeeFactory = new EmployeeFactory();
 
             while (newEmployee.FirstName == null || newEmployee.FirstName.Length <= 0)
             {
-                Console.WriteLine("Enter employee first name: ");
+                Console.WriteLine("Enter employee first name and hit return: ");
                 newEmployee.FirstName = Console.ReadLine();
             }
 
             while (newEmployee.LastName == null || newEmployee.LastName.Length <= 0)
             {
-                Console.WriteLine("Enter customer last name: ");
+                Console.WriteLine("Enter customer last name and hit return: ");
                 newEmployee.LastName = Console.ReadLine();
             }
 
-            while (newEmployee.DepartmentId <= 0)
+            List<Department> allDepartments = departmentFactory.getAll();
+
+            while (newEmployee.DepartmentId <= 0 || allDepartments.TrueForAll(d => d.DepartmentId != newEmployee.DepartmentId))
             {
+                Console.WriteLine("\nAll Departments:");
+
+                foreach (Department d in allDepartments)
+                {
+                    Console.WriteLine(d.DepartmentId + ". " + d.Label);
+                }
                 Console.WriteLine("Enter department ID: ");
+
                 try
                 {
                     newEmployee.DepartmentId = Convert.ToInt32(Console.ReadLine());
@@ -51,19 +63,31 @@ namespace customer_service.Actions
             Console.WriteLine($"Is {newEmployee.FirstName} {newEmployee.LastName} an administrator? Enter YES or NO: ");
             string administratorInput = Console.ReadLine();
 
-            while (administratorInput.ToUpper() != "YES" && administratorInput.ToUpper() != "NO" )
+            while (administratorInput.ToUpper() != "YES" && administratorInput.ToUpper() != "NO")
             {
                 Console.WriteLine($"I'm sorry, I'm not sure I know what you mean by {administratorInput}. Try again. ");
                 administratorInput = Console.ReadLine();
             }
 
-            Console.WriteLine(newEmployee.ToString());
+            if (administratorInput.ToUpper() == "YES")
+            { 
+                newEmployee.Administrator = true;
+            }
+            else
+            {
+                newEmployee.Administrator = false;
+            }
 
             newEmployee.save();
 
-            EmployeeFactory.Instance.ActiveEmployee = newEmployee;
+            List<Employee> employeeList = employeeFactory.getAll();
+            Employee newlySavedEmployee = employeeList[employeeList.Count - 1];
 
-            Console.WriteLine($"{newEmployee.FirstName} {newEmployee.LastName} added. Press any key to return to main menu.");
+            Console.WriteLine(newlySavedEmployee.ToString());
+
+            EmployeeFactory.Instance.ActiveEmployee = newlySavedEmployee;
+
+            Console.WriteLine($"{newlySavedEmployee.FirstName} {newlySavedEmployee.LastName} added. Press any key to return to main menu.");
             Console.ReadLine();
         }
     }
