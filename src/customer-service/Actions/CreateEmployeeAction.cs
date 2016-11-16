@@ -2,6 +2,7 @@
 using customer_service.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace customer_service.Actions
 {
@@ -53,6 +54,10 @@ namespace customer_service.Actions
                 try
                 {
                     newEmployee.DepartmentId = Convert.ToInt32(Console.ReadLine());
+                    if (allDepartments.TrueForAll(d => d.DepartmentId != newEmployee.DepartmentId))
+                    {
+                        Console.WriteLine("Error! Please enter a number corresponding to the employee's department ID: ");
+                    }
                 }
                 catch
                 {
@@ -80,8 +85,7 @@ namespace customer_service.Actions
 
             newEmployee.save();
 
-            List<Employee> employeeList = employeeFactory.getAll();
-            Employee newlySavedEmployee = employeeList[employeeList.Count - 1];
+            Employee newlySavedEmployee = employeeFactory.getAll().Last();
 
             Console.WriteLine(newlySavedEmployee.ToString());
 
