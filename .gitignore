@@ -11,6 +11,7 @@ src/workforce-management/wwwroot/lib
 **/bower_components
 **/bangazon.db
 **/.vs
+**/.vscode
 **/_references.js
 src/workforce-management/wwwroot/_references.js
 src/workforce-management/Properties/**
@@ -38,7 +39,7 @@ x86/
 bld/
 [Bb]in/
 [Oo]bj/
-[Ll]og/
+[Ll]og/ 
 
 # Visual Studio 2015 cache/options directory
 .vs/

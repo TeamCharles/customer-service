@@ -14,7 +14,7 @@ namespace customer_service
      * Purpose: Holds a singleton and can Get labels based on an IncidentTypeId
      * Author: Matt Kraatz
      * Methods:
-     *     List<Label> getLabels(int id) - Gets all Labels that match an IncidentType
+     *     List<Label> GetLabels(int id) - Gets all Labels that match an IncidentType
      */
     public class LabelFactory
     {
