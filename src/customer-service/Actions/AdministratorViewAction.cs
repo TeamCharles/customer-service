@@ -77,7 +77,7 @@ Representative                Open        Closed/Month
                 Console.WriteLine($"{entry.Key}{buffer}{entry.Value.Item1}                  {entry.Value.Item2}");
             }
             Console.WriteLine("");
-            Console.WriteLine("Press any key to return");
+            Console.WriteLine("Press the enter key to return");
             Console.ReadLine();
         }
     }
