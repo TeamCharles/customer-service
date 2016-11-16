@@ -1,10 +1,6 @@
-﻿using customer_service.Data;
-using customer_service.Models;
+﻿using customer_service.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace customer_service
 {
@@ -12,30 +8,51 @@ namespace customer_service
     {
         public static void ReadInput()
         {
-            Customer customer = CustomerFactory.Instance.ActiveIncident;
+            Customer customer = CustomerFactory.Instance.ActiveCustomer;
             Incident incident = IncidentFactory.Instance.ActiveIncident;
 
             if (customer == null || incident == null)
             {
                 Console.WriteLine("A customer or incident could not be found.");
+                Console.Write("> ");
+                Console.ReadLine();
             }
             else
             {
-                LabelFactory label = LabelFactory.Instance;
-                IncidentTypeFactory type = IncidentTypeFactory.Instance;
+                LabelFactory labelFactory = new LabelFactory();
+                IncidentTypeFactory typesFactory = new IncidentTypeFactory();
 
-                string customerName = $"{customer.LastName}, {customer.FirstName}";
-                string border = "==============================================================";
+                var labels = labelFactory.GetLabels(incident.IncidentTypeId);
+                var types = typesFactory.getAll();
 
-                StringBuilder incidentDisplay = new StringBuilder();
-                incidentDisplay.AppendLine("INCIDENT");
-                incidentDisplay.AppendLine("\n");
-                incidentDisplay.AppendLine(border);
-                incidentDisplay.AppendLine($"                            Order: {incident.OrderId}");
-                incidentDisplay.AppendLine("\n");
-                incidentDisplay.AppendLine($"Incident Type: {type.Label}");
-                incidentDisplay.AppendLine("**  Welcome to Bangazon! Command Line Ordering System  **");
-                incidentDisplay.AppendLine(border);
+                Console.Write("\n");
+                Console.WriteLine("INCIDENT");
+                Console.WriteLine("==============================================================");
+                Console.WriteLine($"Customer: {customer.FirstName}, {customer.LastName}                         Order: {incident.OrderId}");
+                Console.WriteLine($"Incident Type: {types[incident.IncidentTypeId].Label}");
+                Console.Write("\n");
+                Console.WriteLine("Labels:");
+                foreach (Label label in labels)
+                {
+                    Console.WriteLine($"* {label.Description}");  
+                }
+                Console.Write("\n");
+
+                if (incident.Resolution == "" || incident.Resolution == null)
+                {
+                    Console.WriteLine("==============================================================");
+                    Console.WriteLine("Enter Resolution: ");
+                    Console.Write("> ");
+                    Console.ReadLine();  // WILL BE REMOVED BEFORE MERGE
+                }
+                else
+                {
+                    Console.WriteLine("Resolution:");
+                    Console.WriteLine(incident.Resolution);
+                    Console.WriteLine("==============================================================");
+                    Console.Write("> ");
+                    Console.ReadLine();  // WILL BE REMOVED BEFORE MERGE
+                }
             }
         }
     }
