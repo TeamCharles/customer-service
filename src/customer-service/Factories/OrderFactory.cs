@@ -16,7 +16,6 @@ namespace customer_service.Factories
 +     * Methods:
 +     *     
 +     *     public static OrderFactory Instance - creates an instance of the order factory
-+     *     public Customer ActiveCustomer - This method sets an active customer for the program
 +     *     public List<Order> getAllOrdersFromCustomer(int customerId) - Make a public list that holds the orders for a selected customer
             public DateTime ParseDate(string date) - Takes the string that represents the date when the order was completed and parse it into DateTime format
 +     */
