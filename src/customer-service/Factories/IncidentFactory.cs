@@ -134,7 +134,7 @@ namespace customer_service
          * Return:
          *     Description for return value
          */
-        public DateTime? ParseDate(string date)
+        public static DateTime? ParseDate(string date)
         {
             if (date != "")
             {

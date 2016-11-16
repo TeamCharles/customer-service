@@ -1,5 +1,6 @@
 ﻿using customer_service.Models;
 using System;
+using System.Globalization;
 
 namespace customer_service
 {
@@ -44,8 +45,15 @@ namespace customer_service
                     Console.Write("> ");
 
                     incident.Resolution = Console.ReadLine();
+
+                    DateTime time = DateTime.Now;
+
                     incident.DateResolved = DateTime.Now;
-                    incident.Save();
+                    incident.save();
+
+                    Console.WriteLine($"Resolution saved to incident #{incident.IncidentId}");
+                    Console.Write("> ");
+                    Console.ReadLine();
                 }
                 else
                 {
