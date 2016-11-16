@@ -19,7 +19,7 @@ namespace customer_service
             Customer customer = new Customer();
             Incident incident = new Incident();
 
-            conn.execute(@"SELECT * FROM Customer WHERE CustomerId = 3",
+            conn.execute(@"SELECT * FROM Customer WHERE CustomerId = 1",
                 (SqliteDataReader reader) =>
                 {
 
