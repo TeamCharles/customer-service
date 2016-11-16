@@ -28,16 +28,12 @@ namespace customer_service_tests
         public void CustomerFactoryCanBeCreated()
         {
             var customerFactory = new CustomerFactory();
-
-
             Assert.NotNull(customerFactory);
         }
 
         [Fact]
         public void CustomerFactorySetsActiveCustomer()
         {
-
-
             Customer customer = new Customer();
             customer.CustomerId = 9999;
             customer.DateCreated = DateTime.Now;
@@ -53,7 +49,6 @@ namespace customer_service_tests
             customer2.LastName = "Kraatz";
 
             CustomerFactory.Instance.ActiveCustomer = customer2;
-
 
             Assert.Equal("Matt", CustomerFactory.Instance.ActiveCustomer.FirstName);
         }
