@@ -65,7 +65,7 @@ namespace customer_service
                     DateTime time = DateTime.Now;
 
                     incident.DateResolved = DateTime.Now;
-                    incident.save();
+                    incident.update();
 
                     Console.WriteLine($"Resolution saved to incident #{incident.IncidentId}");
                     Console.Write("> ");
