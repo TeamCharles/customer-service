@@ -49,7 +49,7 @@ namespace customer_service.Models
          */
         public override string ToString()
         {
-            return string.Format($"[Employee: EmployeeId={EmployeeId}, FirstName={FirstName}, LastName={LastName}, DepartmentId={DepartmentId}, Administrator={Administrator}");
+            return string.Format($"Employee: EmployeeId={EmployeeId}, FirstName={FirstName}, LastName={LastName}, DepartmentId={DepartmentId}, Administrator={Administrator}");
         }
 
 
