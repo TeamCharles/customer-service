@@ -58,11 +58,11 @@ namespace customer_service.Models
             if (this.Resolution == null)
             {
                 query = "INSERT INTO Incident (OrderId,EmployeeId,IncidentTypeId,Resolution,DateResolved) "
-                    + $"VALUES ({this.OrderId},{this.EmployeeId},{this.IncidentTypeId},\"\",null)";
+                    + $"VALUES ({this.OrderId},{this.EmployeeId},{this.IncidentTypeId},'',null)";
             } else
             {
                 query = "INSERT INTO Incident (OrderId,EmployeeId,IncidentTypeId,Resolution,DateResolved) "
-                    + $"VALUES ({this.OrderId},{this.EmployeeId},{this.IncidentTypeId},{this.Resolution},{this.DateResolved})";
+                    + $"VALUES ({this.OrderId},{this.EmployeeId},{this.IncidentTypeId},{this.Resolution},{this.DateResolved.Value.ToString("yyyyMMdd")})";
             }
             BangazonConnection conn = new BangazonConnection();
             conn.insert(query);
