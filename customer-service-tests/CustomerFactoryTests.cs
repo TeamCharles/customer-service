@@ -25,11 +25,37 @@ namespace customer_service_tests
         }
 
         [Fact]
-        public void CustomerModelSetsActiveCustomer()
+        public void CustomerFactoryCanBeCreated()
         {
-            var customer = CustomerFactory.Instance;
-            Assert.NotNull(customer);
+            var customerFactory = new CustomerFactory();
 
+
+            Assert.NotNull(customerFactory);
+        }
+
+        [Fact]
+        public void CustomerFactorySetsActiveCustomer()
+        {
+
+
+            Customer customer = new Customer();
+            customer.CustomerId = 9999;
+            customer.DateCreated = DateTime.Now;
+            customer.FirstName = "Garrett";
+            customer.LastName = "Vangilder";
+
+            CustomerFactory.Instance.ActiveCustomer = customer;
+
+            Customer customer2 = new Customer();
+            customer2.CustomerId = 9998;
+            customer2.DateCreated = DateTime.Now;
+            customer2.FirstName = "Matt";
+            customer2.LastName = "Kraatz";
+
+            CustomerFactory.Instance.ActiveCustomer = customer2;
+
+
+            Assert.Equal("Matt", CustomerFactory.Instance.ActiveCustomer.FirstName);
         }
 
         [Fact]
