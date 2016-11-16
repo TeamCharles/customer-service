@@ -35,7 +35,7 @@ namespace customer_service.Actions
                 try
                 {
                     var loggedInEmployee = employeeFactory.getEmployeeByFullName(employeeName);
-                    employeeFactory.ActiveEmployee = loggedInEmployee;
+                    EmployeeFactory.Instance.ActiveEmployee = loggedInEmployee;
                     break;
                 }
                 catch
