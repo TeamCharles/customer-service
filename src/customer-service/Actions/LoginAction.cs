@@ -23,22 +23,30 @@ namespace customer_service.Actions
         {
             EmployeeFactory employeeFactory = new EmployeeFactory();
 
-            string employeeName = null;
+            string employeeName = string.Empty;
 
             Console.WriteLine("Enter your first and last name to start.Type \"new user\" to create a new user account.");
 
             while (employeeName != "new user")
             {
                 employeeName = Console.ReadLine();
+
+                if (employeeName.Contains(" ") == false && !String.IsNullOrEmpty(employeeName))
+                {
+                    Console.WriteLine("Please enter first and last name.");
+                    continue;
+                }
+
                 if (employeeName.ToLower() == "new user") { break; }
 
-                try
+                var loggedInEmployee = employeeFactory.getEmployeeByFullName(employeeName);
+
+                if (loggedInEmployee != null)
                 {
-                    var loggedInEmployee = employeeFactory.getEmployeeByFullName(employeeName);
                     EmployeeFactory.Instance.ActiveEmployee = loggedInEmployee;
                     break;
                 }
-                catch
+                else
                 {
                     Console.WriteLine($"Could not find employee with name {employeeName}. Type \"new user\" to create a new user account.");
                 }
