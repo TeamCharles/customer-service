@@ -13,6 +13,8 @@ namespace customer_service
     {
         public static void Main(string[] args)
         {
+            //Used to run Actions/ShowSingleIncidentActions.cs
+            // Will be removed before merge
             BangazonConnection conn = new BangazonConnection();
             Customer customer = new Customer();
             Incident incident = new Incident();
