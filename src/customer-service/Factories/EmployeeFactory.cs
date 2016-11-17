@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.Data.Sqlite;
 using customer_service.Models;
 using customer_service.Data;
+using System.Text.RegularExpressions;
 
 namespace customer_service
 {
@@ -121,6 +122,41 @@ namespace customer_service
 
 
             return list;
+        }
+
+        public Employee getEmployeeByFullName(string fullName)
+        {
+            // Break the string into an array, whitespace as the delimiter
+            string[] fullNameAsArray = Regex.Split(fullName, @"\s+").Where(s => s != string.Empty).ToArray();
+            string firstName = fullNameAsArray[0];
+            string lastName = fullNameAsArray[1];
+
+            BangazonConnection conn = new BangazonConnection();
+            Employee e = null;
+
+            conn.execute(@"SELECT 
+                EmployeeId,
+                FirstName, 
+                LastName, 
+                DepartmentId,
+                Administrator
+                FROM Employee
+                WHERE FirstName = '" + firstName + "' AND " + "LastName = '" + lastName + "'",  // pls no sql hacks :(
+                (SqliteDataReader reader) => {
+                while (reader.Read())
+                {
+                    e = new Employee
+                    {
+                        EmployeeId = reader.GetInt32(0),
+                        FirstName = reader[1].ToString(),
+                        LastName = reader[2].ToString(),
+                        DepartmentId = reader.GetInt32(3),
+                        Administrator = Convert.ToBoolean(reader.GetInt32(4))
+                    };
+                }
+            });
+
+            return e;
         }
     }
 }
