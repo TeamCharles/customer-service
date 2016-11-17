@@ -10,6 +10,18 @@ namespace customer_service
     {
         public static void Main(string[] args)
         {
+            public static void ReadInput()
+            {
+            Console.WriteLine(@"
+*********************************************
+*                                           *
+*   BANGAZON INC CUSTOMER SERVICE PORTAL    *
+*                                           *
+*********************************************
+1.Create Incident.
+2.List my Incidents.
+ESC. Exit.");
+            }
         }
     }
 }
