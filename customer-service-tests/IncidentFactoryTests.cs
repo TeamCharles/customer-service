@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -47,7 +47,7 @@ namespace customer_service_tests
         public void CanParseDate(string date)
         {
             var fact = new IncidentFactory();
-            DateTime? parsedDate = fact.ParseDate(date);
+            DateTime? parsedDate = IncidentFactory.ParseDate(date);
             Assert.Equal<DateTime?>(new DateTime(2016, 05, 10), parsedDate);
         }
     }
