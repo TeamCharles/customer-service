@@ -35,7 +35,7 @@ namespace customer_service_tests
             Assert.True(Jeb.DepartmentId == shouldBeJeb.DepartmentId);
             Assert.True(Jeb.Administrator == shouldBeJeb.Administrator);
 
-            var conn = new BangazonConnection();
+            var conn = new BangazonWorkforceConnection();
             conn.insert($"DELETE FROM Employee WHERE EmployeeId = {shouldBeJeb.EmployeeId}");
         }
     }
