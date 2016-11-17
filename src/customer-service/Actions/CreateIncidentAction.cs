@@ -61,6 +61,7 @@ namespace customer_service.Actions
             string orderIDAnswer = Console.ReadLine();
             if (orderIDAnswer.ToLower() == "x")
             {
+                return;
                 // to main menu
             }
             int orderID = Convert.ToInt32(orderIDAnswer);
@@ -99,6 +100,7 @@ namespace customer_service.Actions
             if (incidentTypeIdAnswer.ToLower() == "x")
             {
                 // to main menu
+                return;
             }
 
             int incidentTypeId = Convert.ToInt32(incidentTypeIdAnswer);
