@@ -48,23 +48,47 @@ namespace customer_service.Actions
             Console.WriteLine("***********************************************************************");
 
             string customerName = Console.ReadLine();
-            int customerId = customerFactory.getCustomerByFullName(customerName).CustomerId;
-            
-            Console.WriteLine("Choose a customer order:");
-            List<Order> orderList = orderFactory.getAllOrdersFromCustomer(customerId);
-            foreach (Order order in orderList)
-            {
-                Console.WriteLine($"Order {order.OrderId}: { order.Date}");
+            Customer customerId = customerFactory.getCustomerByFullName(customerName);
 
-            }
-            Console.WriteLine("X.Exit");
-            string orderIDAnswer = Console.ReadLine();
-            if (orderIDAnswer.ToLower() == "x")
+            while (customerId == null)
             {
-                return;
-                // to main menu
+                customerId = customerFactory.getCustomerByFullName(customerName);
+                if (customerId == null)
+                {
+                    Console.WriteLine("This is not a valid answer. Please try again!");
+                    customerName = Console.ReadLine();
+                }
             }
-            int orderID = Convert.ToInt32(orderIDAnswer);
+
+            int orderID = 0;
+
+                Console.WriteLine("Choose a customer order:");
+                List<Order> orderList = orderFactory.getAllOrdersFromCustomer(customerId.CustomerId);
+                foreach (Order order in orderList)
+                {
+                    Console.WriteLine($"Order {order.OrderId}: { order.Date}");
+
+                }
+                Console.WriteLine("X.Exit");
+            while (orderID < 0)
+            {
+                string orderIDAnswer = Console.ReadLine();
+                if (orderIDAnswer.ToLower() == "x")
+                {
+                    return;
+                    // to main menu
+                }
+                try
+                {
+                    orderID = Convert.ToInt32(orderIDAnswer);
+                }
+                catch
+                {
+                    Console.WriteLine("Please enter an order number.");
+                }
+            }
+
+
 
             while (incident.OrderId <= 0 || orderList.TrueForAll(o => incident.OrderId != orderID))
             {
@@ -96,14 +120,26 @@ namespace customer_service.Actions
                 Console.WriteLine($"{incidentType.IncidentTypeId} {incidentType.Label}");
             }
             Console.WriteLine("X.Exit");
-            string incidentTypeIdAnswer = Console.ReadLine();
-            if (incidentTypeIdAnswer.ToLower() == "x")
+            int incidentTypeId = 0;
+            while (incidentTypeId == 0)
             {
-                // to main menu
-                return;
+                string incidentTypeIdAnswer = Console.ReadLine();
+                if (incidentTypeIdAnswer.ToLower() == "x")
+                {
+                    // to main menu
+                    return;
+                }
+                try
+                {
+                     incidentTypeId = Convert.ToInt32(incidentTypeIdAnswer);
+                }
+                catch
+                {
+                    Console.WriteLine("This is not a valid answer. Try again!");
+                }
             }
 
-            int incidentTypeId = Convert.ToInt32(incidentTypeIdAnswer);
+
 
             while (incident.IncidentTypeId <= 0 || incidentTypeList.TrueForAll(o => incident.IncidentTypeId != incidentTypeId))
             {
