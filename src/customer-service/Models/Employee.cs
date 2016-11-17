@@ -72,7 +72,7 @@ namespace customer_service.Models
                 this.Administrator ? 1 : 0
             );
 
-            BangazonConnection conn = new BangazonConnection();
+            BangazonWorkforceConnection conn = new BangazonWorkforceConnection();
             conn.insert(query);
         }
     }
