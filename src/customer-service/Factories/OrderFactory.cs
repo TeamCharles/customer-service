@@ -40,24 +40,24 @@ namespace customer_service.Factories
         //Make a public list that hold that customer orders by id
         public List<Order> getAllOrdersFromCustomer(int customerId)
         {
-            BangazonConnection conn = new BangazonConnection();
+            OrderConnection conn = new OrderConnection();
             List<Order> OrderList = new List<Order>();
 
-            //Execute de query to retrieve all customers
+            //Execute a query to retrieve all orders by customer
             conn.execute(@"select 
 				OrderId,
-			    ""Date"",  
-				DateCreated, 
-				CustomerId  
+			    DateCompleted,
+				DateCreated,
+				CustomerId
 				from ""Order""
-                where CustomerId =" + customerId,
+                where UserId =" + customerId,
                 (SqliteDataReader reader) => {
                     while (reader.Read())
                     {
                         OrderList.Add(new Order
                         {
                             OrderId = reader.GetInt32(0),
-                            Date = ParseDate(reader[1].ToString()),
+                            Date = Convert.ToDateTime(reader[1].ToString()),
                             DateCreated = reader.GetDateTime(2),
                             CustomerId = reader.GetInt32(3)
                         });
@@ -67,16 +67,6 @@ namespace customer_service.Factories
 
             return OrderList;
 
-        }
-
-        //Takes the string that represents the date when the order was completed and parse it into DateTime format
-        public DateTime ParseDate(string date)
-        {
-                 var array = new int[3];
-                 array[0] = Int32.Parse(date.Substring(0, 4));
-                 array[1] = Int32.Parse(date.Substring(4, 2));
-                 array[2] = Int32.Parse(date.Substring(6, 2));
-                 return new DateTime(array[0], array[1], array[2]);
         }
     }
 }
