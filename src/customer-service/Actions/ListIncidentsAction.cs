@@ -37,7 +37,22 @@ BANGAZON INC CUSTOMER SERVICE PORTAL
                 Console.WriteLine($"{i.IncidentId}. {customer.LastName}, {customer.FirstName} : Order {order.OrderId}");
             });
             Console.Write("> ");
-            Console.Read();
+            int selection = 0;
+
+            while (selection == 0)
+            {
+                try
+                {
+                    selection = Convert.ToInt32(Console.ReadLine());
+                }
+                catch
+                {
+                    Console.WriteLine("Sorry!  That is not a valid incident number.  Please select an incident from above.");
+                    Console.Write("> ");
+                    Console.ReadLine();
+                }
+            }     
+
         }
     }
 }
