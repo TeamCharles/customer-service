@@ -14,7 +14,7 @@ namespace customer_service.Data
      */
     public class BangazonWorkforceConnection
     {
-        private string _path = "Data Source=" + System.Environment.GetEnvironmentVariable("Bangazon_Workforce_Db");
+        private string _path = "Data Source=" + System.Environment.GetEnvironmentVariable("Bangazon_Workforce_DB");
 
         /**
          * Purpose: Inserts new information into the workforce database
