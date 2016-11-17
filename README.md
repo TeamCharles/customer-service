@@ -1,8 +1,8 @@
-# Bangazon Workforce Management
+# Bangazon Customer Service
 
 ## Dependencies
 
-To ensure that the  Bangazon Workforce Management App works as intended make sure that you have the following dependencies and technologies on your local machine
+To ensure that the  Bangazon Customer Service App works as intended make sure that you have the following dependencies and technologies on your local machine
 
 - dotnet 
 
