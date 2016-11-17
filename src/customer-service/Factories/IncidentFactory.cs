@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -47,7 +47,6 @@ namespace customer_service
                 _activeIncident = value;
             }
         }
-
 
         /**
          * Purpose: Return a single Incident from the database, retrieved by IncidentId
@@ -128,7 +127,6 @@ namespace customer_service
             return list;
         }
 
-
         /**
          * Purpose: Helper Method to convert a string date from format YYYYMMDD to a DateTime
          * Arguments:
@@ -136,7 +134,7 @@ namespace customer_service
          * Return:
          *     Description for return value
          */
-        public DateTime? ParseDate(string date)
+        public static DateTime? ParseDate(string date)
         {
             if (date != "")
             {
@@ -152,3 +150,4 @@ namespace customer_service
         }
     }
 }
+
