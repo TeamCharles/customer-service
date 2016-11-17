@@ -48,9 +48,10 @@ namespace customer_service.Factories
 				OrderId,
 			    DateCompleted,
 				DateCreated,
-				CustomerId
+				UserId
 				from ""Order""
-                where UserId =" + customerId,
+                where DateCompleted IS NOT NULL
+                AND UserId =" + customerId,
                 (SqliteDataReader reader) => {
                     while (reader.Read())
                     {

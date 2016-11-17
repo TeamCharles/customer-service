@@ -64,15 +64,15 @@ namespace customer_service
          */
         public Customer get(int CustomerId)
         {
-            BangazonConnection conn = new BangazonConnection();
+            OrderConnection conn = new OrderConnection();
             Customer c = null;
 
             conn.execute(@"select 
-				CustomerId,
+				UserId,
 				FirstName, 
 				LastName
-				from customer
-				where CustomerId = " + CustomerId, (SqliteDataReader reader) => {
+				from user
+				where UserId = " + CustomerId, (SqliteDataReader reader) => {
                 while (reader.Read())
                 {
                     c = new Customer
