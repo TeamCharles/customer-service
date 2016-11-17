@@ -27,9 +27,22 @@ namespace customer_service.Actions
         public static void ReadInput()
         {
             IncidentFactory incidentFactory = new IncidentFactory();
+            CustomerFactory customerFactory = new CustomerFactory();
+            List<Customer> customerList = customerFactory.getAll();
             List<Incident> incidents = incidentFactory.getAll();
             Incident incident = new Incident();
             incident.DateCreated = DateTime.Now;
+
+            Console.WriteLine("Please select a customer from the following list:");
+
+
+            foreach (Customer customer in customerList)
+            {
+                Console.WriteLine($"{customer.CustomerId} { customer.FirstName} {customer.LastName} ");
+            }
+
+            int customerId = Convert.ToInt32(Console.ReadLine());
+
 
             while (incident.OrderId <= 0)
             {
