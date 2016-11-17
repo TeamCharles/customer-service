@@ -32,8 +32,6 @@ namespace customer_service_tests
 
         [Theory]
         [InlineData(1)]
-        [InlineData(2)]
-        [InlineData(3)]
 
         public void OrderFactoryGetIncidentsByCustomerId(int customerId)
         {
@@ -52,13 +50,5 @@ namespace customer_service_tests
                 Assert.True(order.DateCreated.GetType() == typeof(DateTime));
             }
         }
-        [Theory]
-         [InlineData(20160510)]
-         public void CanParseDate(string date)
-         {
-             var order = new OrderFactory();
-             DateTime? parsedDate = order.ParseDate(date);
-             Assert.Equal<DateTime?>(new DateTime(2016, 05, 10), parsedDate);
-         }
-}
+    }
 }
