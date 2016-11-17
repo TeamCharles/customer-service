@@ -9,7 +9,7 @@ namespace customer_service
     /**
      * Class: MainMenuAction
      * Purpose: Makes a view for the employee that allows to route to the CreateIncident Action, the ListIncidents Action and if the user is an Admin to AdministratorView Action.  
-     * Author: Anulfo Ordaz
+     * Author: Anulfo Ordaz//Matt Kraatz
      * Methods:
      *     public static void ReadInput() - Promt a list of options that get the user to CreateIncidentAction, ListIncidentsAction and AdministratorView Action.
      */
