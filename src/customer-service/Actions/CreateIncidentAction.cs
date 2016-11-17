@@ -30,12 +30,14 @@ namespace customer_service.Actions
             IncidentFactory incidentFactory = new IncidentFactory();
             CustomerFactory customerFactory = new CustomerFactory();
             OrderFactory orderFactory = new OrderFactory();
+            IncidentTypeFactory incidentTypeFactory = new IncidentTypeFactory();
+            List<IncidentType> incidentTypeList = incidentTypeFactory.getAll();
             List<Customer> customerList = customerFactory.getAll();
             List<Incident> incidents = incidentFactory.getAll();
             Incident incident = new Incident();
             incident.DateCreated = DateTime.Now;
 
-            Console.WriteLine("Please select a customer from the following list to find active orders:");
+            Console.WriteLine("Enter the customers first and last name to start:");
             Console.WriteLine("***********************************************************************");
 
 
@@ -45,53 +47,81 @@ namespace customer_service.Actions
             }
             Console.WriteLine("***********************************************************************");
 
-            int customerId = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine("Please select one of the following Order IDs to add an incident:");
-            Console.WriteLine("***********************************************************************");
+            string customerName = Console.ReadLine();
+            int customerId = customerFactory.getCustomerByFullName(customerName).CustomerId;
+            
+            Console.WriteLine("Choose a customer order:");
             List<Order> orderList = orderFactory.getAllOrdersFromCustomer(customerId);
             foreach (Order order in orderList)
             {
-                Console.WriteLine($"{order.OrderId} { order.Date}");
+                Console.WriteLine($"Order {order.OrderId}: { order.Date}");
 
             }
-            Console.WriteLine("***********************************************************************");
-
-
-            while (incident.OrderId < 0)
+            Console.WriteLine("X.Exit");
+            string orderIDAnswer = Console.ReadLine();
+            if (orderIDAnswer.ToLower() == "x")
             {
-                try
+                // to main menu
+            }
+            int orderID = Convert.ToInt32(orderIDAnswer);
+
+            while (incident.OrderId <= 0 || orderList.TrueForAll(o => incident.OrderId != orderID))
+            {
+                if (orderList.Find(o => o.OrderId == orderID) != null)
                 {
-                    incident.OrderId = Convert.ToInt32(Console.ReadLine());
+                    break;
                 }
-                catch
+
+                if (orderList.TrueForAll(o => incident.OrderId != orderID) || orderID == 0)
                 {
-                    Console.WriteLine("Error! Please enter a number corresponding to a proper Order Id: ");
+                    Console.WriteLine("This is not a valid answer. Try again!");
+                    try
+                    {
+                        orderID = Convert.ToInt32(Console.ReadLine());
+
+                    }
+                    catch
+                    {
+                        Console.WriteLine("Please enter a number");
+                    }
                 }
             }
+            incident.OrderId = orderID;
 
-            while (incident.EmployeeId <= 0)
+          
+            Console.WriteLine("Choose incident type: ");
+            foreach(IncidentType incidentType in incidentTypeList)
             {
-                Console.WriteLine("Enter the Employee Id: ");
-                try
-                {
-                    incident.EmployeeId = Convert.ToInt32(Console.ReadLine());
-                }
-                catch
-                {
-                    Console.WriteLine("Error! Please enter a number corresponding to a proper Employee Id: ");
-                }
+                Console.WriteLine($"{incidentType.IncidentTypeId} {incidentType.Label}");
+            }
+            Console.WriteLine("X.Exit");
+            string incidentTypeIdAnswer = Console.ReadLine();
+            if (incidentTypeIdAnswer.ToLower() == "x")
+            {
+                // to main menu
             }
 
-            while (incident.IncidentTypeId <= 0)
+            int incidentTypeId = Convert.ToInt32(incidentTypeIdAnswer);
+
+            while (incident.IncidentTypeId <= 0 || incidentTypeList.TrueForAll(o => incident.IncidentTypeId != incidentTypeId))
             {
-                Console.WriteLine("Enter the Incident Type ID. Your options are the following: ");
-                try
+                if (incidentTypeList.Find(it => it.IncidentTypeId == incidentTypeId) != null)
                 {
-                    incident.IncidentTypeId = Convert.ToInt32(Console.ReadLine());
+                    break;
                 }
-                catch
+
+                if (incidentTypeList.TrueForAll(o => incident.IncidentTypeId != incidentTypeId) || incidentTypeId == 0)
                 {
-                    Console.WriteLine("Error! Please enter a number corresponding to a proper Incident Type Id: ");
+                    Console.WriteLine("This is not a valid answer. Try again!");
+                    try
+                    {
+                        incidentTypeId = Convert.ToInt32(Console.ReadLine());
+
+                    }
+                    catch
+                    {
+                        Console.WriteLine("Please enter a number");
+                    }
                 }
             }
 
