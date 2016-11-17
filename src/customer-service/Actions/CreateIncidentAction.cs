@@ -1,4 +1,5 @@
-﻿using customer_service.Models;
+﻿using customer_service.Factories;
+using customer_service.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,25 +29,36 @@ namespace customer_service.Actions
         {
             IncidentFactory incidentFactory = new IncidentFactory();
             CustomerFactory customerFactory = new CustomerFactory();
+            OrderFactory orderFactory = new OrderFactory();
             List<Customer> customerList = customerFactory.getAll();
             List<Incident> incidents = incidentFactory.getAll();
             Incident incident = new Incident();
             incident.DateCreated = DateTime.Now;
 
-            Console.WriteLine("Please select a customer from the following list:");
+            Console.WriteLine("Please select a customer from the following list to find active orders:");
+            Console.WriteLine("***********************************************************************");
 
 
             foreach (Customer customer in customerList)
             {
                 Console.WriteLine($"{customer.CustomerId} { customer.FirstName} {customer.LastName} ");
             }
+            Console.WriteLine("***********************************************************************");
 
             int customerId = Convert.ToInt32(Console.ReadLine());
-
-
-            while (incident.OrderId <= 0)
+            Console.WriteLine("Please select one of the following Order IDs to add an incident:");
+            Console.WriteLine("***********************************************************************");
+            List<Order> orderList = orderFactory.getAllOrdersFromCustomer(customerId);
+            foreach (Order order in orderList)
             {
-                Console.WriteLine("Enter the Order Id: ");
+                Console.WriteLine($"{order.OrderId} { order.Date}");
+
+            }
+            Console.WriteLine("***********************************************************************");
+
+
+            while (incident.OrderId < 0)
+            {
                 try
                 {
                     incident.OrderId = Convert.ToInt32(Console.ReadLine());
