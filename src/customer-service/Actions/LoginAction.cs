@@ -25,7 +25,7 @@ namespace customer_service.Actions
 
             string employeeName = string.Empty;
 
-            Console.WriteLine("Enter your first and last name to start.Type \"new user\" to create a new user account.");
+            Console.WriteLine("Enter your first and last name to start. Type \"new user\" to create a new user account.");
 
             while (employeeName.ToLower() != "new user")
             {
