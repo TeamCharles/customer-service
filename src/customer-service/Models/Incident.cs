@@ -78,7 +78,7 @@ namespace customer_service.Models
          */
         public void update()
         {
-            string query = $"UPDATE Incident SET Resolution = '{this.Resolution}', DateResolved = {this.DateResolved.Value.ToString("yyyyMMdd")} "
+            string query = $"UPDATE Incident SET Resolution = \"{this.Resolution}\", DateResolved = {this.DateResolved.Value.ToString("yyyyMMdd")} "
                 + $"WHERE IncidentId = {this.IncidentId}";
             BangazonConnection conn = new BangazonConnection();
             conn.insert(query);

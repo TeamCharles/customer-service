@@ -1,6 +1,7 @@
 ﻿using customer_service.Models;
 using System;
 using System.Globalization;
+using System.Text.RegularExpressions;
 
 namespace customer_service
 {
@@ -60,7 +61,11 @@ namespace customer_service
                     Console.WriteLine("Enter Resolution: ");
                     Console.Write("> ");
 
-                    incident.Resolution = Console.ReadLine();
+                    string returnedResolution = Console.ReadLine();
+
+                    string[] quotes = Regex.Split(returnedResolution, @"""");
+
+                    incident.Resolution = string.Join(@"\u0022", quotes);
 
                     incident.DateResolved = DateTime.Now;
                     incident.update();
