@@ -32,7 +32,13 @@ On initial installation of the Banagazon CLI application you must set an environ
 export Bangazon_Incident_Db="/path/to/bangazon_incident.db"
 ```
 
-Open your `bangazon.db` file in DB Browser, select the `Edit Pragmas` tab and make sure that the `Foreign Keys` checkbox is checked. Open `Data/tables.sql` from the `Execute SQL` tab of DB Browser and execute the statement. Do the same action with `Data/populate.sql`. In DB Browser, click `Write Changes` to commit your changes to the database.
+This project depends upon the database files created by two other projects.
+
+1. Clone or download Team Charles's [Initial Site](https://github.com/TeamCharles/initial-site) and follow the instructions in the README.
+
+1. Clone or download Team Charles's [Workforce Management App](https://github.com/TeamCharles/workforce-management) and follow the instructions in the README.
+
+Open your `bangazon_incident.db` file in DB Browser, select the `Edit Pragmas` tab and make sure that the `Foreign Keys` checkbox is checked. Open `Data/tables.sql` from the `Execute SQL` tab of DB Browser and execute the statement. Do the same action with `Data/populate.sql`. In DB Browser, click `Write Changes` to commit your changes to the database.
 
 Navigate into the `src/customer-service` folder.
 
@@ -66,7 +72,13 @@ On initial installation of the Banagazon CLI application you must set an environ
 $env:Bangazon_Incident_Db="/path/to/bangazon_incident.db"
 ```
 
-Open your `bangazon.db` file in DB Browser, select the `Edit Pragmas` tab and make sure that the `Foreign Keys` checkbox is checked. Open `Data/tables.sql` from the `Execute SQL` tab of DB Browser and execute the statement. Do the same action with `Data/populate.sql`. In DB Browser, click `Write Changes` to commit your changes to the database.
+This project depends upon the database files created by two other projects.
+
+1. Clone or download Team Charles's [Initial Site](https://github.com/TeamCharles/initial-site) and follow the instructions in the README.
+
+1. Clone or download Team Charles's [Workforce Management App](https://github.com/TeamCharles/workforce-management) and follow the instructions in the README.
+
+Open your `bangazon_incident.db` file in DB Browser, select the `Edit Pragmas` tab and make sure that the `Foreign Keys` checkbox is checked. Open `Data/tables.sql` from the `Execute SQL` tab of DB Browser and execute the statement. Do the same action with `Data/populate.sql`. In DB Browser, click `Write Changes` to commit your changes to the database.
 
 Navigate into the `src/customer-service` folder.
 
