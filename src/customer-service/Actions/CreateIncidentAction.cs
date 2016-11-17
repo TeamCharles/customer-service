@@ -141,7 +141,7 @@ namespace customer_service.Actions
                 {
                     Console.WriteLine("How was the incident resolved? ");
                     incident.Resolution = Console.ReadLine();
-                    incident.DateResolved = DateTime.Now;
+                    incident.DateResolved = DateTime.Today;
                 }
                 break;
             }
