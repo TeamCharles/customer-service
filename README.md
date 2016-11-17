@@ -24,12 +24,12 @@ export ASPNETCORE_ENVIRONMENT="Development"
 
 Determine which directory you would like to store your database file and create a blank file with the following commands.
 ```Bash
-touch "/path/to/bangazon.db"
+touch "/path/to/bangazon_incident.db"
 ```
 
 On initial installation of the Banagazon CLI application you must set an environment variable to your local database.
 ```Bash
-export BangazonWeb_Db_Path="/path/to/bangazon.db"
+export Bangazon_Incident_Db="/path/to/bangazon_incident.db"
 ```
 
 Open your `bangazon.db` file in DB Browser, select the `Edit Pragmas` tab and make sure that the `Foreign Keys` checkbox is checked. Open `Data/tables.sql` from the `Execute SQL` tab of DB Browser and execute the statement. Do the same action with `Data/populate.sql`. In DB Browser, click `Write Changes` to commit your changes to the database.
@@ -53,7 +53,7 @@ Clone or fork the project. Navigate to where the project is saved on your machin
 
 Determine which directory you would like to store your database file and create a blank file with the following commands.
 ```Bash
-touch "/path/to/bangazon.db"
+touch "/path/to/bangazon_incident.db"
 ```
 
 This command sets the environment for your local copy of the application to development mode.
@@ -63,7 +63,7 @@ $env:ASPNETCORE_ENVIRONMENT="Development"
 
 On initial installation of the Banagazon CLI application you must set an environment variable to your local database.
 ```Bash
-$env:BangazonWeb_Db_Path="/path/to/bangazon.db"
+$env:Bangazon_Incident_Db="/path/to/bangazon_incident.db"
 ```
 
 Open your `bangazon.db` file in DB Browser, select the `Edit Pragmas` tab and make sure that the `Foreign Keys` checkbox is checked. Open `Data/tables.sql` from the `Execute SQL` tab of DB Browser and execute the statement. Do the same action with `Data/populate.sql`. In DB Browser, click `Write Changes` to commit your changes to the database.
