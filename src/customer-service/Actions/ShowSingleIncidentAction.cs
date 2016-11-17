@@ -62,8 +62,6 @@ namespace customer_service
 
                     incident.Resolution = Console.ReadLine();
 
-                    DateTime time = DateTime.Now;
-
                     incident.DateResolved = DateTime.Now;
                     incident.update();
 
