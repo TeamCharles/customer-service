@@ -32,7 +32,7 @@ On initial installation of the Banagazon CLI application you must set an environ
 export BangazonWeb_Db_Path="/path/to/bangazon.db"
 ```
 
-Open your `bangazon.db` file in DB Browser, select the `Edit Pragmas` tab and make sure that the `Foreign Keys` checkbox is checked. Copy the contents of the `Data/tables.sql` into the `Execute SQL` tab of DB Browser and execute the statement. Do the same action with the contents of the `Data/populate.sql` file. In DB Browser, click `Write Changes` to commit your changes to the database.
+Open your `bangazon.db` file in DB Browser, select the `Edit Pragmas` tab and make sure that the `Foreign Keys` checkbox is checked. Open `Data/tables.sql` from the `Execute SQL` tab of DB Browser and execute the statement. Do the same action with `Data/populate.sql`. In DB Browser, click `Write Changes` to commit your changes to the database.
 
 Navigate into the `src/customer-service` folder.
 
@@ -66,7 +66,7 @@ On initial installation of the Banagazon CLI application you must set an environ
 $env:BangazonWeb_Db_Path="/path/to/bangazon.db"
 ```
 
-Open your `bangazon.db` file in DB Browser, select the `Edit Pragmas` tab and make sure that the `Foreign Keys` checkbox is checked. Copy the contents of the `Data/tables.sql` into the `Execute SQL` tab of DB Browser and execute the statement. Do the same action with the contents of the `Data/populate.sql` file. In DB Browser, click `Write Changes` to commit your changes to the database.
+Open your `bangazon.db` file in DB Browser, select the `Edit Pragmas` tab and make sure that the `Foreign Keys` checkbox is checked. Open `Data/tables.sql` from the `Execute SQL` tab of DB Browser and execute the statement. Do the same action with `Data/populate.sql`. In DB Browser, click `Write Changes` to commit your changes to the database.
 
 Navigate into the `src/customer-service` folder.
 
