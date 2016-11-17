@@ -43,6 +43,20 @@ namespace customer_service_tests
         }
 
         [Theory]
+        [InlineData(1)]
+        [InlineData(2)]
+        [InlineData(3)]
+        public void CanGetAnIncidentByEmployeeId(int id)
+        {
+            var fact = new IncidentFactory();
+            var incident = fact.getByEmployeeId(id);
+            Assert.IsType<List<Incident>>(incident);
+            Assert.NotNull(incident[0].IncidentId);
+            Assert.NotNull(incident[0].EmployeeId);
+            Assert.NotNull(incident[0].OrderId);
+        }
+
+        [Theory]
         [InlineData("20160510")]
         public void CanParseDate(string date)
         {
