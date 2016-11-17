@@ -44,13 +44,21 @@ BANGAZON INC CUSTOMER SERVICE PORTAL
                 try
                 {
                     selection = Convert.ToInt32(Console.ReadLine());
+                    if (incidents.Find(i => i.IncidentId == selection).IncidentId == selection)
+                    {
+                        IncidentFactory.Instance.ActiveIncident = incidentFact.get(selection);
+                        CustomerFactory.Instance.ActiveCustomer = custFact.get(orderFact.get(IncidentFactory.Instance.ActiveIncident.OrderId).CustomerId);
+                        ShowSingleIncidentAction.ReadInput();
+                        Console.Read();
+                        return;
+                    }
                 }
                 catch
                 {
                     Console.WriteLine("Sorry!  That is not a valid incident number.  Please select an incident from above.");
                     Console.Write("> ");
-                    Console.ReadLine();
                 }
+                selection = 0;
             }     
 
         }
