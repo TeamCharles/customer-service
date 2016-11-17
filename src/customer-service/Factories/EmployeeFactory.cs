@@ -58,7 +58,7 @@ namespace customer_service
          */
         public Employee get(int EmployeeId)
         {
-            BangazonConnection conn = new BangazonConnection();
+            BangazonWorkforceConnection conn = new BangazonWorkforceConnection();
             Employee e = null;
 
             conn.execute(@"SELECT 
@@ -68,7 +68,7 @@ namespace customer_service
                 DepartmentId,
                 Administrator
                 FROM Employee
-                WHERE EmployeeId = " + EmployeeId, (SqliteDataReader reader) => {
+                WHERE EndDate IS NULL AND EmployeeId = " + EmployeeId, (SqliteDataReader reader) => {
                 while (reader.Read())
                 {
                     e = new Employee
