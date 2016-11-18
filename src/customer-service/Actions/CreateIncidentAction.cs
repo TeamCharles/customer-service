@@ -171,6 +171,7 @@ namespace customer_service.Actions
             }
             incident.IncidentTypeId = incidentTypeId;
             CustomerFactory.Instance.ActiveCustomer = customerId;
+            IncidentFactory.Instance.ActiveIncident = incident;
             ShowSingleIncidentAction.ReadInput();
 
 
