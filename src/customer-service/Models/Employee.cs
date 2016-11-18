@@ -17,6 +17,11 @@ namespace customer_service.Models
 
     public class Employee
     {
+        public Employee()
+        {
+            StartDate = DateTime.Now;
+        }
+
         [Key]
         public int EmployeeId { get; set; }
 
@@ -34,6 +39,9 @@ namespace customer_service.Models
         [Required]
         public int DepartmentId { get; set; }
         public Department Department { get; set; }
+
+        [Required]
+        public DateTime StartDate { get; set; }
 
         [Required]
         public bool Administrator { get; set; }
@@ -62,17 +70,18 @@ namespace customer_service.Models
         {
             string query = string.Format(@"
             INSERT INTO Employee 
-                (FirstName, LastName, DepartmentId, Administrator)
+                (FirstName, LastName, DepartmentId, Administrator, StartDate)
             VALUES 
-                ('{0}', '{1}', '{2}', '{3}');
+                ('{0}', '{1}', '{2}', '{3}', '{4}');
             ",
                 this.FirstName,
                 this.LastName,
                 this.DepartmentId,
-                this.Administrator ? 1 : 0
+                this.Administrator ? 1 : 0,
+                this.StartDate
             );
 
-            BangazonConnection conn = new BangazonConnection();
+            BangazonWorkforceConnection conn = new BangazonWorkforceConnection();
             conn.insert(query);
         }
     }
