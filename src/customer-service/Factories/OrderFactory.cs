@@ -6,7 +6,7 @@ using Microsoft.Data.Sqlite;
 using customer_service.Models;
 using customer_service.Data;
 
-namespace customer_service.Factories
+namespace customer_service
 {
 
     /**
@@ -68,6 +68,48 @@ namespace customer_service.Factories
 
             return OrderList;
 
+        }
+
+        /**
+        * Purpose: Return a single Order from the database, retrieved by OrderId
+        * Arguments:
+        *     OrderId - the Id of an Order that is being requested
+        * Return:
+        *     An Order matching the provided OrderId retreived from the database
+        */
+        public Order get(int OrderId)
+        {
+            OrderConnection conn = new OrderConnection();
+            Order order = null;
+
+            conn.execute(@"SELECT 
+				OrderId,
+				DateCompleted, 
+				UserId
+				FROM ""Order""
+				WHERE DateCompleted IS NOT null AND OrderId = " + OrderId, (SqliteDataReader reader) => {
+                while (reader.Read())
+                {
+                    order = new Order
+                    {
+                        OrderId = reader.GetInt32(0),
+                        Date = reader.GetDateTime(1),
+                        CustomerId = reader.GetInt32(2)
+                    };
+                }
+            });
+
+            return order;
+        }
+
+        //Takes the string that represents the date when the order was completed and parse it into DateTime format
+        public DateTime ParseDate(string date)
+        {
+                 var array = new int[3];
+                 array[0] = Int32.Parse(date.Substring(0, 4));
+                 array[1] = Int32.Parse(date.Substring(4, 2));
+                 array[2] = Int32.Parse(date.Substring(6, 2));
+                 return new DateTime(array[0], array[1], array[2]);
         }
     }
 }

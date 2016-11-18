@@ -1,5 +1,4 @@
-﻿using customer_service.Factories;
-using customer_service.Models;
+﻿using customer_service.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
