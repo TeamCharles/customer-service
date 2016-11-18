@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using customer_service.Data;
 using Microsoft.Data.Sqlite;
 using customer_service.Models;
+using customer_service.Actions;
 
 namespace customer_service
 {
@@ -13,6 +14,8 @@ namespace customer_service
     {
         public static void Main(string[] args)
         {
+            LoginAction.ReadInput();
+            MainMenu.ReadInput();
         }
     }
 }
