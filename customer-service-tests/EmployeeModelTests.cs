@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using customer_service;
 using customer_service.Models;
 using customer_service.Data;
+using System.Linq;
+using System;
 
 namespace customer_service_tests
 {
@@ -12,8 +14,7 @@ namespace customer_service_tests
         public void CanSaveNewEmployeeToDatabase()
         {
             var employeeFactory = new EmployeeFactory();
-            List<Employee> allEmployees = employeeFactory.getAll();
-            int newEmployeeId = allEmployees[allEmployees.Count - 1].EmployeeId + 1;
+            int lastPK = employeeFactory.getAll().Last().EmployeeId;
 
             Employee Jeb = new Employee()
             {
@@ -25,17 +26,17 @@ namespace customer_service_tests
 
             Jeb.save();
 
-            var shouldBeJeb = employeeFactory.get(newEmployeeId);
+            Employee shouldBeJeb = employeeFactory.getAll().Last();
 
             Assert.NotNull(shouldBeJeb);
             Assert.NotNull(shouldBeJeb.EmployeeId);
-            Assert.True(newEmployeeId == shouldBeJeb.EmployeeId);
+            Assert.True(shouldBeJeb.EmployeeId > lastPK);
             Assert.True(Jeb.FirstName == shouldBeJeb.FirstName);
             Assert.True(Jeb.LastName == shouldBeJeb.LastName);
             Assert.True(Jeb.DepartmentId == shouldBeJeb.DepartmentId);
             Assert.True(Jeb.Administrator == shouldBeJeb.Administrator);
 
-            var conn = new BangazonConnection();
+            var conn = new BangazonWorkforceConnection();
             conn.insert($"DELETE FROM Employee WHERE EmployeeId = {shouldBeJeb.EmployeeId}");
         }
     }

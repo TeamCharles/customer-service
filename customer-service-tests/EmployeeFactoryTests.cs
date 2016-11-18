@@ -63,14 +63,14 @@ namespace customer_service_tests
         [Fact]
         public void CanGetEmployeeByFullName()
         {
-            string fullName = "Matt Hamil";
+            string fullName = "Steve Erwin";
             EmployeeFactory employeeFactory = new EmployeeFactory();
             var shouldBeMatt = employeeFactory.getEmployeeByFullName(fullName);
 
             Assert.NotNull(shouldBeMatt);
             Assert.True(shouldBeMatt.GetType() == typeof(Employee));
-            Assert.True(shouldBeMatt.FirstName == "Matt");
-            Assert.True(shouldBeMatt.LastName == "Hamil");
+            Assert.True(shouldBeMatt.FirstName == "Steve");
+            Assert.True(shouldBeMatt.LastName == "Erwin");
             Assert.True(shouldBeMatt.DepartmentId.GetType() == typeof(int));
             Assert.True(shouldBeMatt.Administrator.GetType() == typeof(bool));
         }
