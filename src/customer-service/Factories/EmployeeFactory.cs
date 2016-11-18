@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.Data.Sqlite;
 using customer_service.Models;
 using customer_service.Data;
+using System.Text.RegularExpressions;
 
 namespace customer_service
 {
@@ -57,7 +58,7 @@ namespace customer_service
          */
         public Employee get(int EmployeeId)
         {
-            BangazonConnection conn = new BangazonConnection();
+            BangazonWorkforceConnection conn = new BangazonWorkforceConnection();
             Employee e = null;
 
             conn.execute(@"SELECT 
@@ -67,7 +68,7 @@ namespace customer_service
                 DepartmentId,
                 Administrator
                 FROM Employee
-                WHERE EmployeeId = " + EmployeeId, (SqliteDataReader reader) => {
+                WHERE EndDate IS NULL AND EmployeeId = " + EmployeeId, (SqliteDataReader reader) => {
                 while (reader.Read())
                 {
                     e = new Employee
@@ -93,7 +94,7 @@ namespace customer_service
          */
         public List<Employee> getAll()
         {
-            BangazonConnection conn = new BangazonConnection();
+            BangazonWorkforceConnection conn = new BangazonWorkforceConnection();
             List<Employee> list = new List<Employee>();
 
             // Execute the query to retrieve all customers
@@ -103,7 +104,8 @@ namespace customer_service
                 LastName, 
                 DepartmentId,
                 Administrator
-                FROM Employee",
+                FROM Employee
+                WHERE EndDate IS NULL",
                 (SqliteDataReader reader) => {
                     while (reader.Read())
                     {
@@ -121,6 +123,41 @@ namespace customer_service
 
 
             return list;
+        }
+
+        public Employee getEmployeeByFullName(string fullName)
+        {
+            // Break the string into an array, whitespace as the delimiter
+            string[] fullNameAsArray = Regex.Split(fullName, @"\s+").Where(s => s != string.Empty).ToArray();
+            string firstName = fullNameAsArray[0];
+            string lastName = fullNameAsArray[1];
+
+            BangazonWorkforceConnection conn = new BangazonWorkforceConnection();
+            Employee e = null;
+
+            conn.execute(@"SELECT 
+                EmployeeId,
+                FirstName, 
+                LastName, 
+                DepartmentId,
+                Administrator
+                FROM Employee
+                WHERE EndDate IS NULL AND FirstName = '" + firstName + "' AND " + "LastName = '" + lastName + "'",  // pls no sql hacks :(
+                (SqliteDataReader reader) => {
+                while (reader.Read())
+                {
+                    e = new Employee
+                    {
+                        EmployeeId = reader.GetInt32(0),
+                        FirstName = reader[1].ToString(),
+                        LastName = reader[2].ToString(),
+                        DepartmentId = reader.GetInt32(3),
+                        Administrator = Convert.ToBoolean(reader.GetInt32(4))
+                    };
+                }
+            });
+
+            return e;
         }
     }
 }

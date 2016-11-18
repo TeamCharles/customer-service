@@ -45,9 +45,14 @@ namespace customer_service
 
             // Execute the query to retrieve all customers
             conn.execute(@"SELECT 
-                LabelId,
-                Description
-                FROM Label",
+                            L.LabelId,
+                            L.Description
+                            FROM Label AS L
+                            JOIN IncidentTypeLabel AS IL
+                            ON IL.LabelId = L.LabelId
+                            JOIN IncidentType AS I
+                            ON IL.IncidentTypeId = I.IncidentTypeId
+                            WHERE IL.IncidentTypeId =" + id,
                 (SqliteDataReader reader) => {
                     while (reader.Read())
                     {
