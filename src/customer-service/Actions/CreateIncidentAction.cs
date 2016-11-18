@@ -169,10 +169,9 @@ namespace customer_service.Actions
                     }
                 }
             }
-            //Currently Broken!
             incident.IncidentTypeId = incidentTypeId;
             CustomerFactory.Instance.ActiveCustomer = customerId;
-            ShowSingleIncidentAction.ReadLine();
+            ShowSingleIncidentAction.ReadInput();
 
 
         }
