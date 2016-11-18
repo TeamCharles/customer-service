@@ -49,7 +49,6 @@ BANGAZON INC CUSTOMER SERVICE PORTAL
                         IncidentFactory.Instance.ActiveIncident = incidentFact.get(selection);
                         CustomerFactory.Instance.ActiveCustomer = custFact.get(orderFact.get(IncidentFactory.Instance.ActiveIncident.OrderId).CustomerId);
                         ShowSingleIncidentAction.ReadInput();
-                        Console.Read();
                         return;
                     }
                 }
