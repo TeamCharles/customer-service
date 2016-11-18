@@ -32,6 +32,22 @@ namespace customer_service
             }
         }
 
+        public DateTime ParseDate(string date)
+        {
+            if (date != "")
+            {
+                var array = new int[3];
+                array[0] = Int32.Parse(date.Substring(0, 4));
+                array[1] = Int32.Parse(date.Substring(4, 2));
+                array[2] = Int32.Parse(date.Substring(6, 2));
+                return new DateTime(array[0], array[1], array[2]);
+            }
+            else
+            {
+                return DateTime.Now;
+            }
+        }
+
 
         /**
          * Purpose: Retrieve all Incident Types from the database

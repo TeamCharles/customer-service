@@ -3,8 +3,7 @@ using customer_service.Models;
 using System;
 
 namespace customer_service.Actions
-{
-
+{ 
     /**
      * Class: CreateEmployeeAction
      * Purpose: Prompts the user for employee name to log in

@@ -62,5 +62,20 @@ namespace customer_service_tests
             Assert.Equal("Alexander", customer.LastName);
             Assert.Equal(1, customer.CustomerId);
         }
+
+        [Fact]
+        public void CustomerFactoryWillGetMultipleCustomersFromDatabase()
+        {
+            CustomerFactory factory = new CustomerFactory();
+            List<Customer> customers = factory.getAll();
+            Assert.NotEmpty(customers);
+            Assert.True(customers.Count() > 1);
+            foreach (Customer customer in customers)
+            {
+                Assert.NotNull(customer.CustomerId);
+                Assert.NotNull(customer.FirstName);
+                Assert.NotNull(customer.LastName);
+            }
+        }
     }
 }
