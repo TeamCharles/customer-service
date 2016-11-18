@@ -29,6 +29,7 @@ BANGAZON INC CUSTOMER SERVICE PORTAL
 
             List<Incident> incidents = incidentFact.getByEmployeeId(employee.EmployeeId);
 
+
             incidents.ForEach(delegate(Incident i)
             {
                 Order order = orderFact.get(i.OrderId);
@@ -36,6 +37,7 @@ BANGAZON INC CUSTOMER SERVICE PORTAL
 
                 Console.WriteLine($"{i.IncidentId}. {customer.LastName}, {customer.FirstName} : Order {order.OrderId}");
             });
+            Console.WriteLine("X.Exit");
             Console.Write("> ");
             int selection = 0;
 
@@ -43,7 +45,16 @@ BANGAZON INC CUSTOMER SERVICE PORTAL
             {
                 try
                 {
-                    selection = Convert.ToInt32(Console.ReadLine());
+                    string input = Console.ReadLine();
+
+                    if (input.ToLower() == "x")
+                    {
+                        return; // to main menu
+
+                    }
+
+                    selection = Convert.ToInt32(input);
+
                     if (incidents.Find(i => i.IncidentId == selection).IncidentId == selection)
                     {
                         IncidentFactory.Instance.ActiveIncident = incidentFact.get(selection);
