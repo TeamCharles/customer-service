@@ -27,10 +27,7 @@ namespace customer_service.Actions
         */
         public static void ReadInput()
         {
-            Console.WriteLine(@"
-                ====================================
-                BANGAZON INC CUSTOMER SERVICE PORTAL
-                ====================================");
+
             Console.WriteLine("Enter the customers first and last name to start:");
             Console.WriteLine("***********************************************************************");
 
@@ -38,9 +35,14 @@ namespace customer_service.Actions
             List<Customer> customerList = customerFactory.getAll();
             foreach (Customer customer in customerList)
             {
-                Console.WriteLine($"{customer.CustomerId} { customer.FirstName} {customer.LastName} ");
+                Console.WriteLine($"{ customer.FirstName} {customer.LastName} ");
             }
             Console.WriteLine("***********************************************************************");
+
+            Console.WriteLine(@"
+                ====================================
+                BANGAZON INC CUSTOMER SERVICE PORTAL
+                ====================================");
 
             string customerName = Console.ReadLine();
             Customer customerId = customerFactory.getCustomerByFullName(customerName);
@@ -70,7 +72,7 @@ namespace customer_service.Actions
                 }
             Console.WriteLine("X.Exit");
 
-            while (orderID < 0)
+            while (orderID == 0)
             {
                 string orderIDAnswer = Console.ReadLine();
                 if (orderIDAnswer.ToLower() == "x")
@@ -167,49 +169,10 @@ namespace customer_service.Actions
                     }
                 }
             }
+            //Currently Broken!
             incident.IncidentTypeId = incidentTypeId;
-
-            LabelFactory labelFactory = new LabelFactory();
-            List<Label> labelList = labelFactory.GetLabels(incidentTypeId);
-
-            Console.WriteLine(@"
-                ====================================
-                BANGAZON INC CUSTOMER SERVICE PORTAL
-                ====================================");
-            Console.WriteLine("Suggested Resolutions:");
-
-            foreach (Label label in labelList)
-            {
-                Console.WriteLine($"{ label.Description}");
-            }
-            while (incident.Resolution == null)
-            {
-                string answer = "";
-                while (answer != "y" || answer != "n")
-                {
-                    Console.WriteLine("Would you like to resolve this issue ? (y / n)");
-                    answer = Console.ReadLine().ToLower();
-                    if (answer == "y" || answer == "n")
-                    {
-                        break;
-                    }
-                }
-                if (answer == "y")
-                {
-                    Console.WriteLine(@"
-                        ====================================
-                        BANGAZON INC CUSTOMER SERVICE PORTAL
-                        ====================================");
-                    Console.WriteLine("How was the incident resolved? ");
-                    incident.Resolution = Console.ReadLine();
-                    incident.DateResolved = DateTime.Today;
-                }
-                break;
-            }
-            incident.EmployeeId = EmployeeFactory.Instance.ActiveEmployee.EmployeeId;
-            incident.save();
-            Console.WriteLine($"Incident # {incidents.Count +1 } has been added. Press any key to return to main menu.");
-            Console.ReadLine();
+            CustomerFactory.Instance.ActiveCustomer = customerId;
+            ShowSingleIncidentAction.ReadLine();
 
 
         }
