@@ -118,6 +118,11 @@ namespace customer_service
         public Customer getCustomerByFullName(string fullName)
         {
             string[] fullNameAsArray = Regex.Split(fullName, @"\s+").Where(s => s != string.Empty).ToArray();
+            if (fullNameAsArray.Length < 2 || fullNameAsArray.Length > 2)
+            {
+                Customer d = null;
+                return d;
+            }
             string firstName = fullNameAsArray[0];
             string lastName = fullNameAsArray[1];
 

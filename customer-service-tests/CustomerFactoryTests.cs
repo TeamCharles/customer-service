@@ -69,6 +69,7 @@ namespace customer_service_tests
             CustomerFactory factory = new CustomerFactory();
             List<Customer> customers = factory.getAll();
             Assert.NotEmpty(customers);
+            Assert.True(customers.Count() > 1);
             foreach (Customer customer in customers)
             {
                 Assert.NotNull(customer.CustomerId);
