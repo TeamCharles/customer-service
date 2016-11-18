@@ -2,6 +2,9 @@
 using Microsoft.Data.Sqlite;
 using customer_service.Data;
 using customer_service.Models;
+using System.Collections.Generic;
+using System.Text.RegularExpressions;
+using System.Linq;
 
 namespace customer_service
 {
@@ -84,6 +87,64 @@ namespace customer_service
                 }
             });
 
+            return c;
+        }
+
+        public List<Customer> getAll()
+        {
+            OrderConnection conn = new OrderConnection();
+            List<Customer> list = new List<Customer>();
+           
+            conn.execute(@"SELECT 
+                UserId,
+                FirstName, 
+                LastName
+                FROM user",
+                (SqliteDataReader reader) =>
+                {
+                    while (reader.Read())
+                    {
+                        list.Add(new Customer
+                        {
+                            CustomerId = reader.GetInt32(0),
+                            FirstName = reader[1].ToString(),
+                            LastName = reader[2].ToString()
+                        });
+                    }
+               });
+               return list;
+        }
+
+        public Customer getCustomerByFullName(string fullName)
+        {
+            string[] fullNameAsArray = Regex.Split(fullName, @"\s+").Where(s => s != string.Empty).ToArray();
+            if (fullNameAsArray.Length < 2 || fullNameAsArray.Length > 2)
+            {
+                Customer d = null;
+                return d;
+            }
+            string firstName = fullNameAsArray[0];
+            string lastName = fullNameAsArray[1];
+
+            OrderConnection conn = new OrderConnection();
+            Customer c = null;
+            conn.execute(@"SELECT 
+                UserId,
+                FirstName, 
+                LastName
+                FROM user
+                WHERE FirstName = '" + firstName + "' AND " + "LastName = '" + lastName + "'",
+    (SqliteDataReader reader) => {
+        while (reader.Read())
+        {
+            c = new Customer
+            {
+                 CustomerId = reader.GetInt32(0),
+                FirstName = reader[1].ToString(),
+                LastName = reader[2].ToString()
+            };
+        }
+    });
             return c;
         }
     }
