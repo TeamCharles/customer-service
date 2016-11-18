@@ -27,20 +27,15 @@ namespace customer_service.Actions
         */
         public static void ReadInput()
         {
-            IncidentFactory incidentFactory = new IncidentFactory();
-            CustomerFactory customerFactory = new CustomerFactory();
-            OrderFactory orderFactory = new OrderFactory();
-            IncidentTypeFactory incidentTypeFactory = new IncidentTypeFactory();
-            List<IncidentType> incidentTypeList = incidentTypeFactory.getAll();
-            List<Customer> customerList = customerFactory.getAll();
-            List<Incident> incidents = incidentFactory.getAll();
-            Incident incident = new Incident();
-            incident.DateCreated = DateTime.Now;
-
+            Console.WriteLine(@"
+                ====================================
+                BANGAZON INC CUSTOMER SERVICE PORTAL
+                ====================================");
             Console.WriteLine("Enter the customers first and last name to start:");
             Console.WriteLine("***********************************************************************");
 
-
+            CustomerFactory customerFactory = new CustomerFactory();
+            List<Customer> customerList = customerFactory.getAll();
             foreach (Customer customer in customerList)
             {
                 Console.WriteLine($"{customer.CustomerId} { customer.FirstName} {customer.LastName} ");
@@ -61,15 +56,20 @@ namespace customer_service.Actions
             }
 
             int orderID = 0;
-
-                Console.WriteLine("Choose a customer order:");
+            Console.WriteLine(@"
+                ====================================
+                BANGAZON INC CUSTOMER SERVICE PORTAL
+                ====================================");
+            Console.WriteLine("Choose a customer order:");
+                OrderFactory orderFactory = new OrderFactory();
                 List<Order> orderList = orderFactory.getAllOrdersFromCustomer(customerId.CustomerId);
                 foreach (Order order in orderList)
                 {
                     Console.WriteLine($"Order {order.OrderId}: { order.Date}");
 
                 }
-                Console.WriteLine("X.Exit");
+            Console.WriteLine("X.Exit");
+
             while (orderID < 0)
             {
                 string orderIDAnswer = Console.ReadLine();
@@ -88,8 +88,12 @@ namespace customer_service.Actions
                 }
             }
 
-
-
+            IncidentFactory incidentFactory = new IncidentFactory();
+            IncidentTypeFactory incidentTypeFactory = new IncidentTypeFactory();
+            List<IncidentType> incidentTypeList = incidentTypeFactory.getAll();
+            List<Incident> incidents = incidentFactory.getAll();
+            Incident incident = new Incident();
+            incident.DateCreated = DateTime.Now;
             while (incident.OrderId <= 0 || orderList.TrueForAll(o => incident.OrderId != orderID))
             {
                 if (orderList.Find(o => o.OrderId == orderID) != null)
@@ -111,9 +115,12 @@ namespace customer_service.Actions
                     }
                 }
             }
-            incident.OrderId = orderID;
 
-          
+            incident.OrderId = orderID;
+            Console.WriteLine(@"
+                ====================================
+                BANGAZON INC CUSTOMER SERVICE PORTAL
+                ====================================");
             Console.WriteLine("Choose incident type: ");
             foreach(IncidentType incidentType in incidentTypeList)
             {
@@ -139,8 +146,6 @@ namespace customer_service.Actions
                 }
             }
 
-
-
             while (incident.IncidentTypeId <= 0 || incidentTypeList.TrueForAll(o => incident.IncidentTypeId != incidentTypeId))
             {
                 if (incidentTypeList.Find(it => it.IncidentTypeId == incidentTypeId) != null)
@@ -162,7 +167,21 @@ namespace customer_service.Actions
                     }
                 }
             }
+            incident.IncidentTypeId = incidentTypeId;
 
+            LabelFactory labelFactory = new LabelFactory();
+            List<Label> labelList = labelFactory.GetLabels(incidentTypeId);
+
+            Console.WriteLine(@"
+                ====================================
+                BANGAZON INC CUSTOMER SERVICE PORTAL
+                ====================================");
+            Console.WriteLine("Suggested Resolutions:");
+
+            foreach (Label label in labelList)
+            {
+                Console.WriteLine($"{ label.Description}");
+            }
             while (incident.Resolution == null)
             {
                 string answer = "";
@@ -177,15 +196,19 @@ namespace customer_service.Actions
                 }
                 if (answer == "y")
                 {
+                    Console.WriteLine(@"
+                        ====================================
+                        BANGAZON INC CUSTOMER SERVICE PORTAL
+                        ====================================");
                     Console.WriteLine("How was the incident resolved? ");
                     incident.Resolution = Console.ReadLine();
                     incident.DateResolved = DateTime.Today;
                 }
                 break;
             }
-
+            incident.EmployeeId = EmployeeFactory.Instance.ActiveEmployee.EmployeeId;
             incident.save();
-            Console.WriteLine($"Incident # {incidents.Count } has been added. Press any key to return to main menu.");
+            Console.WriteLine($"Incident # {incidents.Count +1 } has been added. Press any key to return to main menu.");
             Console.ReadLine();
 
 
