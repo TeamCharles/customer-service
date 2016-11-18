@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using customer_service;
 using customer_service.Models;
 using customer_service.Data;
+using System;
 
 namespace customer_service_tests
 {
@@ -35,7 +36,7 @@ namespace customer_service_tests
             Assert.True(Jeb.DepartmentId == shouldBeJeb.DepartmentId);
             Assert.True(Jeb.Administrator == shouldBeJeb.Administrator);
 
-            var conn = new BangazonConnection();
+            var conn = new BangazonWorkforceConnection();
             conn.insert($"DELETE FROM Employee WHERE EmployeeId = {shouldBeJeb.EmployeeId}");
         }
     }
