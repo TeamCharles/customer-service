@@ -92,14 +92,14 @@ namespace customer_service
 
         public List<Customer> getAll()
         {
-            BangazonConnection conn = new BangazonConnection();
+            OrderConnection conn = new OrderConnection();
             List<Customer> list = new List<Customer>();
            
             conn.execute(@"SELECT 
-                CustomerId,
+                UserId,
                 FirstName, 
                 LastName
-                FROM Customer",
+                FROM user",
                 (SqliteDataReader reader) =>
                 {
                     while (reader.Read())
@@ -126,13 +126,13 @@ namespace customer_service
             string firstName = fullNameAsArray[0];
             string lastName = fullNameAsArray[1];
 
-            BangazonConnection conn = new BangazonConnection();
+            OrderConnection conn = new OrderConnection();
             Customer c = null;
             conn.execute(@"SELECT 
-                CustomerId,
+                UserId,
                 FirstName, 
                 LastName
-                FROM Customer
+                FROM user
                 WHERE FirstName = '" + firstName + "' AND " + "LastName = '" + lastName + "'",
     (SqliteDataReader reader) => {
         while (reader.Read())
