@@ -15,8 +15,6 @@ namespace customer_service
     {
         public static void Main(string[] args)
         {
-            LoginAction.ReadInput();
-            MainMenu.ReadInput();
         }
     }
 }
