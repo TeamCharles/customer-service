@@ -1,4 +1,4 @@
-﻿/*
+/*
 Add some default incident types
  */
 INSERT INTO IncidentType (Label) VALUES ('Defective Product');

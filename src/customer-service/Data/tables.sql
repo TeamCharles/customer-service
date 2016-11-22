@@ -1,4 +1,4 @@
-﻿CREATE TABLE "Label"
+CREATE TABLE "Label"
 (
 	"LabelId" INTEGER PRIMARY KEY,
 	"Description" text NOT NULL,
@@ -30,7 +30,5 @@ CREATE TABLE "Incident"
 	EmployeeId INTEGER NOT NULL,
 	Resolution text,
 	DateResolved datetime,
-	FOREIGN KEY ("IncidentTypeId") REFERENCES "IncidentType" ("IncidentTypeId"),
-	FOREIGN KEY ("OrderId") REFERENCES "Order" ("OrderId"),
-	FOREIGN KEY ("EmployeeId") REFERENCES "Employee" ("EmployeeId")
+	Foreign Key("IncidentTypeId") REFERENCES "IncidentType" ("IncidentTypeId")
 );

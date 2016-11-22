@@ -4,7 +4,7 @@
 
 To ensure that the  Bangazon Customer Service App works as intended make sure that you have the following dependencies and technologies on your local machine
 
-- dotnet 
+- dotnet
 
 If you need to download dotnet onto your local machine, visit [Microsoft's Documentation](https://www.microsoft.com/en-us/download/details.aspx?id=30653)
 
@@ -32,9 +32,9 @@ On initial installation of the Banagazon CLI application you must set an environ
 export BangazonWeb_Db_Path="/path/to/bangazon_Incident_DB.db"
 ```
 
-Open your `bangazon_Incident_Db.db` file in DB Browser, select the `Edit Pragmas` tab and make sure that the `Foreign Keys` checkbox is unchecked. 
-Open `Data/tables.sql` from the `Execute SQL` tab of DB Browser, erase every reference to Order, Employee, Department 
-and Customer and execute the statement. Do the same action with `Data/populate.sql`. 
+Open your `bangazon_Incident_DB.db` file in DB Browser, select the `Edit Pragmas` tab and make sure that the `Foreign Keys` checkbox is unchecked.
+Open `Data/tables.sql` from the `Execute SQL` tab of DB Browser, erase every reference to Order, Employee, Department
+and Customer and execute the statement. Do the same action with `Data/populate.sql`.
 In DB Browser, click `Write Changes` to commit your changes to the database.
 
 Navigate into the `src/customer-service` folder.
@@ -64,14 +64,14 @@ This command sets the environment for your local copy of the application to deve
 $env:ASPNETCORE_ENVIRONMENT="Development"
 ```
 
-On initial installation of the Banagazon CLI application you must set an environment variable to your local database.
+On initial installation of the Bangazon CLI application you must set an environment variable to your local database.
 ```Bash
-$env:BangazonWeb_Db_Path="/path/to/bangazon_Incident_Db.db"
+$env:BangazonWeb_Db_Path="/path/to/bangazon_Incident_DB.db"
 ```
 
-Open your `bangazon_Incident_Db.db` file in DB Browser, select the `Edit Pragmas` tab and make sure that the `Foreign Keys` checkbox is unchecked. 
-Open `Data/tables.sql` from the `Execute SQL` tab of DB Browser, erase every reference to Order, Employee, Department 
-and Customer and execute the statement. Do the same action with `Data/populate.sql`. 
+Open your `bangazon_Incident_DB.db` file in DB Browser, select the `Edit Pragmas` tab and make sure that the `Foreign Keys` checkbox is unchecked.
+Open `Data/tables.sql` from the `Execute SQL` tab of DB Browser, erase every reference to Order, Employee, Department
+and Customer and execute the statement. Do the same action with `Data/populate.sql`.
 . In DB Browser, click `Write Changes` to commit your changes to the database.
 
 Navigate into the `src/customer-service` folder.
