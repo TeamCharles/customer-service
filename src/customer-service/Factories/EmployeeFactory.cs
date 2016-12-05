@@ -58,7 +58,7 @@ namespace customer_service
          */
         public Employee get(int EmployeeId)
         {
-            BangazonConnection conn = new BangazonConnection();
+            BangazonWorkforceConnection conn = new BangazonWorkforceConnection();
             Employee e = null;
 
             conn.execute(@"SELECT 
@@ -68,7 +68,7 @@ namespace customer_service
                 DepartmentId,
                 Administrator
                 FROM Employee
-                WHERE EmployeeId = " + EmployeeId, (SqliteDataReader reader) => {
+                WHERE EndDate IS NULL AND EmployeeId = " + EmployeeId, (SqliteDataReader reader) => {
                 while (reader.Read())
                 {
                     e = new Employee
@@ -94,7 +94,7 @@ namespace customer_service
          */
         public List<Employee> getAll()
         {
-            BangazonConnection conn = new BangazonConnection();
+            BangazonWorkforceConnection conn = new BangazonWorkforceConnection();
             List<Employee> list = new List<Employee>();
 
             // Execute the query to retrieve all customers
@@ -104,7 +104,8 @@ namespace customer_service
                 LastName, 
                 DepartmentId,
                 Administrator
-                FROM Employee",
+                FROM Employee
+                WHERE EndDate IS NULL",
                 (SqliteDataReader reader) => {
                     while (reader.Read())
                     {
@@ -131,7 +132,7 @@ namespace customer_service
             string firstName = fullNameAsArray[0];
             string lastName = fullNameAsArray[1];
 
-            BangazonConnection conn = new BangazonConnection();
+            BangazonWorkforceConnection conn = new BangazonWorkforceConnection();
             Employee e = null;
 
             conn.execute(@"SELECT 
@@ -141,7 +142,7 @@ namespace customer_service
                 DepartmentId,
                 Administrator
                 FROM Employee
-                WHERE FirstName = '" + firstName + "' AND " + "LastName = '" + lastName + "'",  // pls no sql hacks :(
+                WHERE EndDate IS NULL AND FirstName = '" + firstName + "' AND " + "LastName = '" + lastName + "'",  // pls no sql hacks :(
                 (SqliteDataReader reader) => {
                 while (reader.Read())
                 {

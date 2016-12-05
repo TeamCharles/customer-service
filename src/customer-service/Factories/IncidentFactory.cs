@@ -12,11 +12,11 @@ namespace customer_service
     /**
      * Class: IncidentFactory
      * Purpose: Query the Incident table on the database to return a single Incident or all Incidents
-     * Author: Matt Kraatz
+     * Author: Matt Kraatz/Dayne Wright
      * Methods:
      *     get(int IncidentId) - Return a single Incident from the database, retrieved by IncidentId
      *     getAll() - Return a list of all Incidents from the database
-     *     
+     *     getByEmployeeId(int EmployeeId) - Return a list of all Incidents for the employee
      */
     public class IncidentFactory
     {
@@ -126,6 +126,45 @@ namespace customer_service
             );
             return list;
         }
+
+        /**
+         * Purpose: Gets all incidents for an employee id
+         * Arguments:
+         *     employeeId - the id of the employee
+         * Return:
+         *     A list of all incidents with this employee id
+         */
+         public List<Incident> getByEmployeeId(int EmployeeId)
+        {
+            BangazonConnection conn = new BangazonConnection();
+            List<Incident> list = new List<Incident>();
+
+            conn.execute(@"select 
+				IncidentId,
+				IncidentTypeId,
+				OrderId,
+				EmployeeId,
+				Resolution,
+				DateResolved
+				from Incident
+				where EmployeeId = " + EmployeeId, (SqliteDataReader reader) => {
+                while (reader.Read())
+                {
+                    list.Add(new Incident
+                    {
+                        IncidentId = reader.GetInt32(0),
+                        IncidentTypeId = reader.GetInt32(1),
+                        OrderId = reader.GetInt32(2),
+                        EmployeeId = reader.GetInt32(3),
+                        Resolution = reader[4].ToString(),
+                        DateResolved = ParseDate(reader[5].ToString())
+                    });
+                }
+            });
+
+            return list;
+        }
+
 
         /**
          * Purpose: Helper Method to convert a string date from format YYYYMMDD to a DateTime

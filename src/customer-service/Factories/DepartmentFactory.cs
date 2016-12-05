@@ -57,12 +57,12 @@ namespace customer_service
          */
         public Department get(int DepartmentId)
         {
-            BangazonConnection conn = new BangazonConnection();
+            BangazonWorkforceConnection conn = new BangazonWorkforceConnection();
             Department d = null;
 
             conn.execute(@"SELECT 
                 DepartmentId,
-                Label
+                Name
                 FROM Department
                 WHERE DepartmentId = " + DepartmentId, (SqliteDataReader reader) =>
             {
@@ -88,13 +88,13 @@ namespace customer_service
          */
         public List<Department> getAll()
         {
-            BangazonConnection conn = new BangazonConnection();
+            BangazonWorkforceConnection conn = new BangazonWorkforceConnection();
             List<Department> list = new List<Department>();
 
             // Execute the query to retrieve all customers
             conn.execute(@"SELECT 
                 DepartmentId,
-                Label
+                Name
                 FROM Department",
                 (SqliteDataReader reader) =>
                 {

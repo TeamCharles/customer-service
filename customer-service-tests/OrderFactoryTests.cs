@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using customer_service;
 using customer_service.Models;
 using customer_service.Data;
-using customer_service.Factories;
 using Xunit;
 
 namespace customer_service_tests
@@ -32,8 +31,6 @@ namespace customer_service_tests
 
         [Theory]
         [InlineData(1)]
-        [InlineData(2)]
-        [InlineData(3)]
 
         public void OrderFactoryGetIncidentsByCustomerId(int customerId)
         {
@@ -52,6 +49,7 @@ namespace customer_service_tests
                 Assert.True(order.DateCreated.GetType() == typeof(DateTime));
             }
         }
+
         [Theory]
          [InlineData(20160510)]
          public void CanParseDate(string date)
@@ -60,5 +58,15 @@ namespace customer_service_tests
              DateTime? parsedDate = order.ParseDate(date);
              Assert.Equal<DateTime?>(new DateTime(2016, 05, 10), parsedDate);
          }
-}
+
+        [Theory]
+
+        [InlineData(3)]
+        public void CanGetOrderById(int id)
+        {
+            var order = new OrderFactory();
+            var newOrder = order.get(id);
+            Assert.True(newOrder.GetType() == typeof(Order));
+        }
+    }
 }

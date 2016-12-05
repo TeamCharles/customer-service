@@ -6,7 +6,7 @@ using Microsoft.Data.Sqlite;
 using customer_service.Models;
 using customer_service.Data;
 
-namespace customer_service.Factories
+namespace customer_service
 {
 
     /**
@@ -40,24 +40,25 @@ namespace customer_service.Factories
         //Make a public list that hold that customer orders by id
         public List<Order> getAllOrdersFromCustomer(int customerId)
         {
-            BangazonConnection conn = new BangazonConnection();
+            OrderConnection conn = new OrderConnection();
             List<Order> OrderList = new List<Order>();
 
-            //Execute de query to retrieve all customers
+            //Execute a query to retrieve all orders by customer
             conn.execute(@"select 
 				OrderId,
-			    ""Date"",  
-				DateCreated, 
-				CustomerId  
+			    DateCompleted,
+				DateCreated,
+				UserId
 				from ""Order""
-                where CustomerId =" + customerId,
+                where DateCompleted IS NOT NULL
+                AND UserId =" + customerId,
                 (SqliteDataReader reader) => {
                     while (reader.Read())
                     {
                         OrderList.Add(new Order
                         {
                             OrderId = reader.GetInt32(0),
-                            Date = ParseDate(reader[1].ToString()),
+                            Date = Convert.ToDateTime(reader[1].ToString()),
                             DateCreated = reader.GetDateTime(2),
                             CustomerId = reader.GetInt32(3)
                         });
@@ -67,6 +68,38 @@ namespace customer_service.Factories
 
             return OrderList;
 
+        }
+
+        /**
+        * Purpose: Return a single Order from the database, retrieved by OrderId
+        * Arguments:
+        *     OrderId - the Id of an Order that is being requested
+        * Return:
+        *     An Order matching the provided OrderId retreived from the database
+        */
+        public Order get(int OrderId)
+        {
+            OrderConnection conn = new OrderConnection();
+            Order order = null;
+
+            conn.execute(@"SELECT 
+				OrderId,
+				DateCompleted, 
+				UserId
+				FROM ""Order""
+				WHERE DateCompleted IS NOT null AND OrderId = " + OrderId, (SqliteDataReader reader) => {
+                while (reader.Read())
+                {
+                    order = new Order
+                    {
+                        OrderId = reader.GetInt32(0),
+                        Date = reader.GetDateTime(1),
+                        CustomerId = reader.GetInt32(2)
+                    };
+                }
+            });
+
+            return order;
         }
 
         //Takes the string that represents the date when the order was completed and parse it into DateTime format
