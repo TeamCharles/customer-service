@@ -32,6 +32,11 @@ On initial installation of the Banagazon CLI application you must set an environ
 export BangazonWeb_Db_Path="/path/to/bangazon_Incident_DB.db"
 ```
 
+This project depends upon the database files created by two other projects.
+
+1. Clone or download Team Charles's [Initial Site](https://github.com/TeamCharles/initial-site) and follow the instructions in the README.
+1. Clone or download Team Charles's [Workforce Management App](https://github.com/TeamCharles/workforce-management) and follow the instructions in the README.
+
 Open your `bangazon_Incident_DB.db` file in DB Browser, select the `Edit Pragmas` tab and make sure that the `Foreign Keys` checkbox is unchecked.
 Open `Data/tables.sql` from the `Execute SQL` tab of DB Browser, erase every reference to Order, Employee, Department
 and Customer and execute the statement. Do the same action with `Data/populate.sql`.
@@ -68,6 +73,11 @@ On initial installation of the Bangazon CLI application you must set an environm
 ```Bash
 $env:BangazonWeb_Db_Path="/path/to/bangazon_Incident_DB.db"
 ```
+
+This project depends upon the database files created by two other projects.
+
+1. Clone or download Team Charles's [Initial Site](https://github.com/TeamCharles/initial-site) and follow the instructions in the README.
+1. Clone or download Team Charles's [Workforce Management App](https://github.com/TeamCharles/workforce-management) and follow the instructions in the README.
 
 Open your `bangazon_Incident_DB.db` file in DB Browser, select the `Edit Pragmas` tab and make sure that the `Foreign Keys` checkbox is unchecked.
 Open `Data/tables.sql` from the `Execute SQL` tab of DB Browser, erase every reference to Order, Employee, Department
