@@ -1,12 +1,3 @@
-﻿/*
-Add some default departments
- */
-INSERT INTO Department (Label) VALUES ('Apparel');
-INSERT INTO Department (Label) VALUES ('Electronics');
-INSERT INTO Department (Label) VALUES ('Toys & Games');
-INSERT INTO Department (Label) VALUES ('Books');
-INSERT INTO Department (Label) VALUES ('Home Furnishings');
-
 /*
 Add some default incident types
  */
@@ -16,42 +7,6 @@ INSERT INTO IncidentType (Label) VALUES ('Unhappy With Product');
 INSERT INTO IncidentType (Label) VALUES ('Request For Information');
 INSERT INTO IncidentType (Label) VALUES ('Fraudulent Charge');
 INSERT INTO IncidentType (Label) VALUES ('Shipping Info Update');
-
-/*
-Add some employees
-*/ 
-INSERT INTO Employee (FirstName,LastName,DepartmentId,Administrator) VALUES
-	('Matt','Kraatz',1,0),
-	('Anulfo','Ordaz',2,1),
-	('Matt','Hamil',3,0),
-	('Dayne','Wright',4,0),
-	('Garrett','Vangilder',5,1);
-
-/*
-Add some customers
-*/
-INSERT INTO Customer (FirstName,LastName) VALUES
-	('Steve','Brownlee'),
-	('Tractor','Ryan'),
-	('Joe','Shepherd'),
-	('Scott','Humphries'),
-	('John','Wark');
-
-/*
-Add some orders
-*/
-INSERT INTO "Order" ("Date",CustomerId) VALUES
-	('20161005',1),
-	('20161010',2),
-	('20161015',3),
-	('20161020',4),
-	('20161025',5),
-	('20161105',1),
-	('20161110',2),
-	('20161115',3),
-	('20161120',4),
-	('20161125',5);
-
 /*
 Add some labels
 */
