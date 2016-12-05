@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using customer_service.Actions;
 
 
 namespace customer_service
@@ -49,11 +50,11 @@ namespace customer_service
                     {
                         if (selection == 1)
                         {
-                            //CreateIncidentAction.ReadInput();
+                            CreateIncidentAction.ReadInput();
                         }
                         if (selection == 2)
                         {
-                            //ListIncidentsAction.ReadInput();
+                            ListIncidentsAction.ReadInput();
                         }
                         if (selection == 3)
                         {
